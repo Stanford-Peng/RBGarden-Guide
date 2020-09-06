@@ -10,7 +10,8 @@ import UIKit
 import MapKit
 class HomeMapControllerViewController: UIViewController {
     @IBOutlet weak var homeMap: MKMapView!
-    let RBGCoordinate = CLLocationCoordinate2DMake( -37.830328,144.979534)
+    
+    let RBGCoordinate = CLLocationCoordinate2D( latitude: -37.830328,longitude: 144.979534)
     var locationManager:CLLocationManager = CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,13 @@ class HomeMapControllerViewController: UIViewController {
         homeMap.setRegion(homeMap.regionThatFits(zoomRegion), animated: true)
     }
 
+    //MARK: locate current location
+    
+    @IBAction func locateSelf(_ sender: Any) {
+        homeMap.zoomToUserLocation()
+    }
+    
+
     /*
     // MARK: - Navigation
 
@@ -45,4 +53,12 @@ class HomeMapControllerViewController: UIViewController {
     }
     */
 
+}
+
+extension MKMapView{
+    func zoomToUserLocation() {
+      guard let coordinate = userLocation.location?.coordinate else { return }
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+      setRegion(region, animated: true)
+    }
 }
