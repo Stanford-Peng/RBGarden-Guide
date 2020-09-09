@@ -2,7 +2,7 @@
 //  Exhibition+CoreDataProperties.swift
 //  RBGarden-Guide
 //
-//  Created by Stanford on 5/9/20.
+//  Created by Stanford on 8/9/20.
 //  Copyright © 2020 Monash. All rights reserved.
 //
 //
@@ -17,11 +17,11 @@ extension Exhibition {
         return NSFetchRequest<Exhibition>(entityName: "Exhibition")
     }
 
-    @NSManaged public var exhibitionName: String?
     @NSManaged public var exhibitionDescription: String?
-    @NSManaged public var location_long: Double
-    @NSManaged public var location_lat: Double
+    @NSManaged public var exhibitionName: String?
     @NSManaged public var iconPath: String?
+    @NSManaged public var location_lat: Double
+    @NSManaged public var location_long: Double
     @NSManaged public var plants: NSSet?
 
 }

@@ -2,7 +2,7 @@
 //  Plant+CoreDataProperties.swift
 //  RBGarden-Guide
 //
-//  Created by Stanford on 5/9/20.
+//  Created by Stanford on 8/9/20.
 //  Copyright © 2020 Monash. All rights reserved.
 //
 //
@@ -17,10 +17,10 @@ extension Plant {
         return NSFetchRequest<Plant>(entityName: "Plant")
     }
 
-    @NSManaged public var scientificName: String?
-    @NSManaged public var plantName: String?
-    @NSManaged public var discoverYear: Date?
+    @NSManaged public var discoverYear: String?
     @NSManaged public var family: String?
+    @NSManaged public var plantName: String?
+    @NSManaged public var scientificName: String?
     @NSManaged public var exhibitions: NSSet?
 
 }

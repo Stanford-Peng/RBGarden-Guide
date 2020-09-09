@@ -11,7 +11,7 @@ import UIKit
 class AddExhibitionTableController: UITableViewController {
     let BASIC_SECTION = 0
     let PLANT_SECTION = 1
-
+    var basicCell:UITableViewCell?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,20 +32,29 @@ class AddExhibitionTableController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == BASIC_SECTION{
-            return 4
+            return 1
         }
         return 1
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        if indexPath.section == 0 {
+            basicCell = tableView.dequeueReusableCell(withIdentifier: "exhibitionBasicCell", for: indexPath)
+            return basicCell!
+        }
         // Configure the cell...
-
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath)
         return cell
     }
-    */
+
+    //Arrange your custom row height
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if  indexPath.section == 0{
+            return 340.0;
+        }
+        return 32.0;
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -82,14 +91,19 @@ class AddExhibitionTableController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "addLocation"{
+            let controller = segue.destination as! addLocationViewController
+            controller.delegate = basicCell as! ExhibitionBasicCell
+            
+        }
     }
-    */
+
 
 }

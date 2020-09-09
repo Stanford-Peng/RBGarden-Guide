@@ -15,7 +15,6 @@ class HomeMapControllerViewController: UIViewController {
     var locationManager:CLLocationManager = CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let authorisationStatus = CLLocationManager.authorizationStatus()
         if authorisationStatus == .notDetermined{
             locationManager.requestWhenInUseAuthorization()

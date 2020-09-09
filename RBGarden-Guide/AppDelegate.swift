@@ -11,10 +11,12 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var databaseController:DatabaseProtocol?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //create a database controller in app scope for being used in other table controller
+        databaseController = CoreDataController()
         return true
     }
 

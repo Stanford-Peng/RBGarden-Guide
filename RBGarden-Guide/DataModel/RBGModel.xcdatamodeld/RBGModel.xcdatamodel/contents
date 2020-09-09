@@ -9,7 +9,7 @@
         <relationship name="plants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plant" inverseName="exhibitions" inverseEntity="Plant"/>
     </entity>
     <entity name="Plant" representedClassName="Plant" syncable="YES">
-        <attribute name="discoverYear" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="discoverYear" optional="YES" attributeType="String"/>
         <attribute name="family" optional="YES" attributeType="String"/>
         <attribute name="plantName" optional="YES" attributeType="String"/>
         <attribute name="scientificName" optional="YES" attributeType="String"/>
