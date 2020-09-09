@@ -36,7 +36,7 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
         //let allExhibitions = databaseController?.fetchAllExhibitions(sort: true)
         var annotationSet:[ExhibitionAnnotation] = []
         for exhibition:Exhibition in exhibitionSet {
-            let exhibitionAnnotation = ExhibitionAnnotation(title:exhibition.exhibitionName!, subtitle:exhibition.exhibitionDescription!.cut(length: 35) + "...", coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
+            let exhibitionAnnotation = ExhibitionAnnotation(title:exhibition.exhibitionName!, subtitle:exhibition.exhibitionDescription!, coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
             //exhibitionAnnotation.
             homeMapController?.homeMap.addAnnotation(exhibitionAnnotation)
             annotationSet.append(exhibitionAnnotation)

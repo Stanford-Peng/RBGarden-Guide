@@ -50,6 +50,8 @@ protocol DatabaseProtocol: NSObject {
     
     //add for home map to directly fetching without listening
     func fetchAllExhibitions(sort bool:Bool) -> [Exhibition]
+    //add for exhibition detail fetching plants
+    func fetchExhibitionPlants(exhibitionName:String) -> [Plant]
     
 }
 

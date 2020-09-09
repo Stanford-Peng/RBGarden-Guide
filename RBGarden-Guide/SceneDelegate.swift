@@ -25,10 +25,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         splitViewController.preferredDisplayMode = .allVisible
         let navigationController = splitViewController.viewControllers.first as! UINavigationController
         let exhibitionTableViewController = navigationController.viewControllers.first as! ExhibitionTableController
-        let mapViewController = splitViewController.viewControllers.last as! HomeMapViewController
+        let bottomNavigationController = splitViewController.viewControllers.last as! UINavigationController
+        let mapViewController = bottomNavigationController.viewControllers.first as! HomeMapViewController
 
+        //build coomunication between homeMap and exhibitionTable
         exhibitionTableViewController.homeMapController = mapViewController
         mapViewController.exhibitionTableController = exhibitionTableViewController
+        
+        // give 
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

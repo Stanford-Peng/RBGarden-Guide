@@ -97,7 +97,7 @@ class CoreDataController: NSObject,NSFetchedResultsControllerDelegate, DatabaseP
         if listener.listenerType == .exhibition || listener.listenerType == .all{
 //            listener.onExhibitionChange(change: .update, exhibitionPlants: fetchExhibitionPlants(), exhibition: Exhibition)
             
-            listener.OnExhibitionChange(change: .update, exhibition: fetchOneExhibitionByName(exhibitionName: listener.exhibition!.exhibitionName!), exhibitionPlants: fetchExhibitionPlants(exhibition: listener.exhibition!))
+            listener.OnExhibitionChange(change: .update, exhibition: fetchOneExhibitionByName(exhibitionName: listener.exhibition!.exhibitionName!), exhibitionPlants: fetchExhibitionPlants(exhibitionName: (listener.exhibition?.exhibitionName)!))
             
         }
         
@@ -146,10 +146,10 @@ class CoreDataController: NSObject,NSFetchedResultsControllerDelegate, DatabaseP
        }
     
 
-    func fetchExhibitionPlants(exhibition:Exhibition) -> [Plant] {
+    func fetchExhibitionPlants(exhibitionName:String) -> [Plant] {
             let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
             let nameSortDescriptor = NSSortDescriptor(key: "plantName", ascending: true)
-            let predicate = NSPredicate(format: "ANY exhibitions.exhibitionName == %@", exhibition.exhibitionName!)
+            let predicate = NSPredicate(format: "ANY exhibitions.exhibitionName == %@", exhibitionName)
             fetchRequest.sortDescriptors = [nameSortDescriptor]
             fetchRequest.predicate = predicate
             

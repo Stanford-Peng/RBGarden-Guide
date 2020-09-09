@@ -12,6 +12,7 @@ class HomeMapViewController: UIViewController {
     @IBOutlet weak var homeMap: MKMapView!
     //weak var databaseController : DatabaseProtocol?
     weak var exhibitionTableController:ExhibitionTableController!
+    var tappedView:MKAnnotationView?
     
     let RBGCoordinate = CLLocationCoordinate2D( latitude: -37.830328,longitude: 144.979534)
     var locationManager:CLLocationManager = CLLocationManager()
@@ -65,15 +66,18 @@ class HomeMapViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "goToExhibitionDetail" {
+            let destination = segue.destination as! ExhibitionDetailController
+            destination.exhibitionAnnotation = (tappedView?.annotation as! ExhibitionAnnotation)
+        }
     }
-    */
+
 
 }
 
@@ -102,6 +106,12 @@ extension HomeMapViewController: MKMapViewDelegate {
     }
     return view
 
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        tappedView = view
+        performSegue(withIdentifier: "goToExhibitionDetail", sender: self)
+        
     }
 
 }
