@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "49BE2C4E-D471-4911-A4F3-7D45B64381CA"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "498B62FC-2050-44FD-B168-0E69067D8CFA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RBGarden-Guide/HomeMapControllerViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EFD3EC7B-AE9C-4805-A1F6-AFFE3A7C055D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RBGarden-Guide/ExhibitionTableController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "ExhibitionTableController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "EFD3EC7B-AE9C-4805-A1F6-AFFE3A7C055D - b8ffb7d16a117248"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RBGarden_Guide.ExhibitionTableController.allExhibitions.getter : Swift.Array&lt;RBGarden_Guide.Exhibition&gt;"
+                  moduleName = "RBGarden-Guide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stanford/Documents/MIT/FIT5140AMS/ass1/RBGarden-Guide/RBGarden-Guide/ExhibitionTableController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "122">
+               </Location>
+               <Location
+                  uuid = "EFD3EC7B-AE9C-4805-A1F6-AFFE3A7C055D - 63259950ddb74c54"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RBGarden_Guide.ExhibitionTableController.allExhibitions.setter : Swift.Array&lt;RBGarden_Guide.Exhibition&gt;"
+                  moduleName = "RBGarden-Guide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stanford/Documents/MIT/FIT5140AMS/ass1/RBGarden-Guide/RBGarden-Guide/ExhibitionTableController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "EFD3EC7B-AE9C-4805-A1F6-AFFE3A7C055D - 84480753d9b5e2c5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RBGarden_Guide.ExhibitionTableController.allExhibitions.modify : Swift.Array&lt;RBGarden_Guide.Exhibition&gt;"
+                  moduleName = "RBGarden-Guide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stanford/Documents/MIT/FIT5140AMS/ass1/RBGarden-Guide/RBGarden-Guide/ExhibitionTableController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "EFD3EC7B-AE9C-4805-A1F6-AFFE3A7C055D - 68df47267c1ba779"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RBGarden_Guide.ExhibitionTableController.allExhibitions.modify : Swift.Array&lt;RBGarden_Guide.Exhibition&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "RBGarden-Guide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stanford/Documents/MIT/FIT5140AMS/ass1/RBGarden-Guide/RBGarden-Guide/ExhibitionTableController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "EFD3EC7B-AE9C-4805-A1F6-AFFE3A7C055D - ff3940ed1820ea77"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RBGarden_Guide.ExhibitionTableController.init(style: __C.UITableViewStyle) -&gt; RBGarden_Guide.ExhibitionTableController"
+                  moduleName = "RBGarden-Guide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stanford/Documents/MIT/FIT5140AMS/ass1/RBGarden-Guide/RBGarden-Guide/ExhibitionTableController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "171">
+               </Location>
+               <Location
+                  uuid = "EFD3EC7B-AE9C-4805-A1F6-AFFE3A7C055D - 34dc12726db732c1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RBGarden_Guide.ExhibitionTableController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; RBGarden_Guide.ExhibitionTableController"
+                  moduleName = "RBGarden-Guide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stanford/Documents/MIT/FIT5140AMS/ass1/RBGarden-Guide/RBGarden-Guide/ExhibitionTableController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "287">
+               </Location>
+               <Location
+                  uuid = "EFD3EC7B-AE9C-4805-A1F6-AFFE3A7C055D - 37ac2d8494ffdb49"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RBGarden_Guide.ExhibitionTableController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;RBGarden_Guide.ExhibitionTableController&gt;"
+                  moduleName = "RBGarden-Guide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stanford/Documents/MIT/FIT5140AMS/ass1/RBGarden-Guide/RBGarden-Guide/ExhibitionTableController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "228">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C06FAC32-AE31-42C6-A0B2-8019ABAFE5FA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RBGarden-Guide/ExhibitionTableController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "33480970-5289-4A52-BE91-42BC018296BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RBGarden-Guide/AddExhibitionTableController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "50D01E70-C4AA-4715-BB85-C6529617C45C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RBGarden-Guide/ExhibitionTableController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "sortWayToggle(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B4BDCD6C-8322-4C04-8FFD-9674DA607CAE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RBGarden-Guide/ExhibitionTableController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "onExhibitionTableChange(change:exhibitions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
