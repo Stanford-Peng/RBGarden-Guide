@@ -7,23 +7,50 @@
 //
 
 import UIKit
+import MapKit
+class ExhibitionTableController: UITableViewController, DatabaseListener, UISearchResultsUpdating {
 
-class ExhibitionTableController: UITableViewController, DatabaseListener {
+    
     
     var sort: Bool? = true
     var allExhibitions:[Exhibition] = []
+    var filteredExhibitions: [Exhibition] = []
     var listenerType:ListenerType = .exhibitionTable
+    
     
     var plant: Plant?
     var exhibition: Exhibition?
     weak var databaseController : DatabaseProtocol?
+    weak var homeMapController:HomeMapViewController?
     
+    //forcefully add annotations when lauching
+    func addFirstTime(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
+        let allExhibitions = databaseController?.fetchAllExhibitions(sort: true)
+        addExhibitionAnnotations(exhibitionSet: allExhibitions!)
+    }
     
+    //Add annotation
+    func addExhibitionAnnotations(exhibitionSet:[Exhibition]){
+        //let allExhibitions = databaseController?.fetchAllExhibitions(sort: true)
+        var annotationSet:[ExhibitionAnnotation] = []
+        for exhibition:Exhibition in exhibitionSet {
+            let exhibitionAnnotation = ExhibitionAnnotation(title:exhibition.exhibitionName!, subtitle:exhibition.exhibitionDescription!.cut(length: 35) + "...", coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
+            //exhibitionAnnotation.
+            homeMapController?.homeMap.addAnnotation(exhibitionAnnotation)
+            annotationSet.append(exhibitionAnnotation)
+        }
+        homeMapController?.homeMap.addAnnotations(annotationSet)
+    }
     
     //to initialize and listen to all the exhibitions
     func onExhibitionTableChange(change: DatabaseChange, exhibitions: [Exhibition]) {
         allExhibitions = exhibitions
         tableView.reloadData()
+        updateSearchResults(for: navigationItem.searchController!)
+        //homeMapController?.homeMap.clear
+        //addExhibitionAnnotations(exhibitionSet: filteredExhibitions)
     }
     
     func onPlantTableChange(change: DatabaseChange, plants: [Plant]) {
@@ -63,14 +90,43 @@ class ExhibitionTableController: UITableViewController, DatabaseListener {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate//repeat addFirstTime(should be removed)
         databaseController = appDelegate.databaseController
+        //filteredExhibitions = allExhibitions
+        //Add search controller
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Heroes"
+        navigationItem.searchController = searchController
+        
+        // This view controller decides how the search controller is presented
+        definesPresentationContext = true
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    //Confirm to UISearchResultsUpdating
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text?.lowercased() else {
+            return
+        }
+        if searchText.count > 0 {
+            filteredExhibitions = allExhibitions.filter({ (exhibition: Exhibition) -> Bool in
+                guard let name = exhibition.exhibitionName, let exhibitionDescription = exhibition.exhibitionDescription else{
+                return false //hero.name.lowercased().contains(searchText)
+                }
+                return (name.contains(searchText)||exhibitionDescription.contains(searchText))//make it case sentsitive
+            })
+        } else {
+            filteredExhibitions = allExhibitions
+        }
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -83,7 +139,7 @@ class ExhibitionTableController: UITableViewController, DatabaseListener {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
 
-        return allExhibitions.count
+        return filteredExhibitions.count
     }
     
     //Arrange your custom row height
@@ -94,7 +150,7 @@ class ExhibitionTableController: UITableViewController, DatabaseListener {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let exhibitionCell = tableView.dequeueReusableCell(withIdentifier: "exhibitionCell", for: indexPath) as! ExhibitionTableCell
-        let exhibition = allExhibitions[indexPath.row]
+        let exhibition = filteredExhibitions[indexPath.row]
         
         exhibitionCell.name.text = exhibition.exhibitionName
         exhibitionCell.shortDescription.text = exhibition.exhibitionDescription?.cut(length: 100)
@@ -105,6 +161,16 @@ class ExhibitionTableController: UITableViewController, DatabaseListener {
     }
     
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let exhibition = filteredExhibitions[indexPath.row]
+        let locationAnnotation:ExhibitionAnnotation = ExhibitionAnnotation(title: exhibition.exhibitionName!, subtitle: exhibition.exhibitionDescription!, coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
+        homeMapController?.homeMap.addAnnotation(locationAnnotation)
+        homeMapController?.focusOn(annotation: locationAnnotation, latitudinalMeters: 1000,longitudinalMeters: 1000)
+      //  homeMapController?.focusViaCoordinate(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), latitudinalMeters: 1000, longitudinalMeters: 1000)
+        if let mapVC = homeMapController {
+                   splitViewController?.showDetailViewController(mapVC, sender: nil)
+               }
+    }
 
 
     /*

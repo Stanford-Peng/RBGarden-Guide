@@ -10,7 +10,7 @@
         <!--RBG Overview-->
         <scene sceneID="tjR-9P-CGg">
             <objects>
-                <viewController title="RBG Overview" id="Mae-JM-Ckp" customClass="HomeMapControllerViewController" customModule="RBGarden_Guide" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="RBG Overview" id="Mae-JM-Ckp" customClass="HomeMapViewController" customModule="RBGarden_Guide" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9iv-W9-rP4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

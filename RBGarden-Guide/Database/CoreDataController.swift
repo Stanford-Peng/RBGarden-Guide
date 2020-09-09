@@ -21,7 +21,9 @@ class CoreDataController: NSObject,NSFetchedResultsControllerDelegate, DatabaseP
     var allExhibitionsFetchedResultsController: NSFetchedResultsController<Exhibition>?
     var singleExhibitionController:NSFetchedResultsController<Exhibition>?
     var singlePlantController:NSFetchedResultsController<Plant>?
+    
     var exhibitionTableSort:Bool = true
+    
     override init() {
         // Load the Core Data Stack
         persistentContainer = NSPersistentContainer(name: "RBGModel")
@@ -291,7 +293,7 @@ class CoreDataController: NSObject,NSFetchedResultsControllerDelegate, DatabaseP
         let _ = addPlantToExhibition(plant: plant12, exhibition: exhibition4)
         
         
-        let exhibition5 = addExhibition(exhibitionName: "Southern China Collection", exhibitionDescription: "hina has 1/8th of the world’s plants. Many of these are important in Chinese culture and have been cultivated and celebrated in art and everyday life for centuries.", location_long: 144.980548, location_lat: -37.827510, iconPath: "willow")
+        let exhibition5 = addExhibition(exhibitionName: "Southern China Collection", exhibitionDescription: "China has 1/8th of the world’s plants. Many of these are important in Chinese culture and have been cultivated and celebrated in art and everyday life for centuries.", location_long: 144.980548, location_lat: -37.827510, iconPath: "willow")
         let plant13 = addPlant(scientificName: "Magnolia denudata", plantName: "lilytree", discoverYear: "1792", family: "Magnoliaceae")
         let plant14 = addPlant(scientificName: "Camellia granthamiana", plantName: "camellia-granthamiana", discoverYear: "1956", family: "Theaceae")
         let plant15 = addPlant(scientificName: "Salvia miltiorrhiza", plantName: "Redroot sage", discoverYear: "1833", family: "Lamiaceae")

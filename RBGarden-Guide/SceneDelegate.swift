@@ -18,6 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        //link mapViewController to exhibition table
+        let splitViewController = window?.rootViewController as! UISplitViewController
+
+        splitViewController.preferredDisplayMode = .allVisible
+        let navigationController = splitViewController.viewControllers.first as! UINavigationController
+        let exhibitionTableViewController = navigationController.viewControllers.first as! ExhibitionTableController
+        let mapViewController = splitViewController.viewControllers.last as! HomeMapViewController
+
+        exhibitionTableViewController.homeMapController = mapViewController
+        mapViewController.exhibitionTableController = exhibitionTableViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

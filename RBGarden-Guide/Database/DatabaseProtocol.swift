@@ -48,6 +48,9 @@ protocol DatabaseProtocol: NSObject {
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
     
+    //add for home map to directly fetching without listening
+    func fetchAllExhibitions(sort bool:Bool) -> [Exhibition]
+    
 }
 
 //scientificName: String?
