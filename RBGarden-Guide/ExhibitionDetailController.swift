@@ -8,14 +8,41 @@
 
 import UIKit
 import MapKit
-class ExhibitionDetailController: UITableViewController {
+class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITableViewDelegate{
+    
+    
+    
+    //customize table data source differently
+    func numberOfSections(in tableView: UITableView) -> Int {
+         // #warning Incomplete implementation, return the number of sections
+            return 1
+     }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return allPlants.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let plantCell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath) as! plantCellController
+        let plant = allPlants[indexPath.row]
+        plantCell.scientificName.text = plant.scientificName
+        plantCell.commonName.text = plant.plantName
+        plantCell.discoveredYear.text = plant.discoverYear
+        return plantCell
+    }
+    
+    //Arrange your custom row height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64;
+    }
+    
+    
     var exhibitionAnnotation:ExhibitionAnnotation?
     weak var databaseController : DatabaseProtocol?
     var allPlants:[Plant] = []
     @IBOutlet weak var iconImage: UIImageView!
     
+    @IBOutlet weak var plantTableView: UITableView!
     @IBOutlet weak var name: UILabel!
-    
     
     @IBOutlet weak var exhibitionDescription: UITextView!
     
@@ -23,6 +50,8 @@ class ExhibitionDetailController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        plantTableView.dataSource = self
+        plantTableView.delegate = self
         guard let eAnnotation = exhibitionAnnotation else{
             return
         }
@@ -30,7 +59,11 @@ class ExhibitionDetailController: UITableViewController {
         name.text = eAnnotation.title
         exhibitionDescription.text = eAnnotation.subtitle
         mapView.addAnnotation(eAnnotation)
+        eAnnotation.subtitle = exhibitionDescription.text.cut(length: 30) + "..."
+        mapView.selectAnnotation(eAnnotation, animated: true)
         
+        let zoomRegion = MKCoordinateRegion(center: eAnnotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         
@@ -39,36 +72,36 @@ class ExhibitionDetailController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-
-        return allPlants.count
-    }
-    
-    //Arrange your custom row height
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64;
-    }
-
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let plantCell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath)
-        let plant = allPlants[indexPath.row]
-        //plantCell.
-        
-//        exhibitionCell.name.text = exhibition.exhibitionName
-//        exhibitionCell.shortDescription.text = exhibition.exhibitionDescription?.cut(length: 100)
-//        exhibitionCell.icon.image = UIImage(named: exhibition.iconPath!)
-        // Configure the cell...
-
-        return nil
-    }
+//
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 1
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//
+//        return allPlants.count
+//    }
+//
+//    //Arrange your custom row height
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 64;
+//    }
+//
+//
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let plantCell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath) as! plantCellController
+//        let plant = allPlants[indexPath.row]
+//        plantCell.scientificName.text = plant.scientificName
+//
+////        exhibitionCell.name.text = exhibition.exhibitionName
+////        exhibitionCell.shortDescription.text = exhibition.exhibitionDescription?.cut(length: 100)
+////        exhibitionCell.icon.image = UIImage(named: exhibition.iconPath!)
+//        // Configure the cell...
+//
+//        return plantCell
+//    }
     
 
 }

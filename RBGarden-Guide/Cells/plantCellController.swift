@@ -11,6 +11,10 @@ import UIKit
 class plantCellController: UITableViewCell {
 
     
+    @IBOutlet weak var scientificName: UILabel!
+    @IBOutlet weak var commonName: UILabel!
+    @IBOutlet weak var discoveredYear: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
