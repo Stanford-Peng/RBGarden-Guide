@@ -9,9 +9,9 @@
 import UIKit
 
 protocol AddPlantToDetailDelegate:AnyObject {
+    var addedPlants:[Plant] { get set }
     func addPlant(plant:Plant)
 }
-
 
 
 class AddExhibitionTableController: UITableViewController, AddPlantToDetailDelegate{
@@ -24,6 +24,8 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
     var allPlants:[Plant]?
     var addedPlants:[Plant] = []
     
+    
+    //@IBOutlet weak var iconSegment: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,32 +95,42 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
             tableView.deselectRow(at: indexPath, animated: false)
             return
         }
-        if indexPath.section == PLANT_SECTION{
+        if indexPath.section == PLANT_SECTION && indexPath.row == 0{
             tableView.deselectRow(at: indexPath, animated: true)
             performSegue(withIdentifier: "goToPlantTable", sender: self)
         }
         //displayMessage(title: "Party Full", message: "Unable to add more members to party")
     }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
     
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        if indexPath.section == 1{
+            return true
+        }
+        return false
+    }
+    
+    
+    
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            let alert = UIAlertController(title: "Alert", message: "Do you want to delete", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: { (action) in
+                self.addedPlants.remove(at: indexPath.row - 1 )
+                tableView.reloadSections([1], with: .automatic)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
     
     /*
      // Override to support rearranging the table view.
@@ -159,4 +171,54 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
         addedPlants.append(plant)
         tableView.reloadSections([1], with: .automatic)
     }
+    
+    @IBAction func saveExhibitionToDatabase(_ sender: Any) {
+        //databaseController?.addExhibition(exhibitionName: <#T##String#>, exhibitionDescription: <#T##String#>, location_long: <#T##Double#>, location_lat: <#T##Double#>, iconPath: <#T##String#>)
+        //tableView.cellForRow(at: <#T##IndexPath#>)
+        let indexPath = IndexPath(row: 0, section: 0)
+        let basicCell = tableView.cellForRow(at: indexPath) as! ExhibitionBasicCell
+        
+        if !(basicCell.nameTextfield.text?.isEmpty ?? false) && !(basicCell.descriptionTextField.text?.isEmpty ?? false) && !(basicCell.locationTextField.text?.isEmpty ?? false) && addedPlants.count >= 3 {
+            let exhibitionName = basicCell.nameTextfield.text
+            
+            let exhibitionDescription = basicCell.descriptionTextField.text
+            let location_long = basicCell.location_long
+            let location_lat = basicCell.location_lat
+            let iconSegment = basicCell.iconSegment!
+            let iconName = convertIntToIcon(segmentInt: iconSegment.selectedSegmentIndex)
+            let addedExhibition = databaseController?.addExhibition(exhibitionName: exhibitionName!, exhibitionDescription: exhibitionDescription!, location_long: location_long!, location_lat: location_lat!, iconPath: iconName)
+            for plant in addedPlants{
+                let _ = databaseController?.addPlantToExhibition(plant: plant, exhibition: addedExhibition!)
+            }
+            navigationController?.popViewController(animated: true)
+            displayMessage(title: "Successful", message: "The new exhibition is added!")
+            
+        } else{
+            displayMessage(title: "Empty Required Field", message: "Please fill in the fields first!")
+        }
+        
+    }
+    
+    func convertIntToIcon(segmentInt:Int) -> String{
+        switch segmentInt {
+        case 0:
+            return "fruit-tree"
+        case 1:
+            return "palm-tree"
+        case 2:
+            return "sakura"
+        case 3:
+            return "silver-fern"
+        case 4:
+            return "willow"
+        case 5:
+            return "nut"
+        case 6:
+            return "acacia"
+        default:
+            return "fruit-tree"
+        }
+        
+    }
+    
 }

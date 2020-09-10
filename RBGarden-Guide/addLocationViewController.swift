@@ -18,7 +18,12 @@ class addLocationViewController: UIViewController {
     var delegate:addLocationDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let RBGCoordinate = CLLocationCoordinate2D( latitude: -37.830328,longitude: 144.979534)
+        let RBGAnnotation : ExhibitionAnnotation = ExhibitionAnnotation(title: "Royal Botanic Garden", subtitle:"Royal Botanic Garden in Melbourne City", coordinate: RBGCoordinate)
+        currentMap.addAnnotation(RBGAnnotation)
+        currentMap.selectAnnotation(RBGAnnotation, animated: true)
+        let zoomRegion = MKCoordinateRegion(center: RBGCoordinate, latitudinalMeters: 1000, longitudinalMeters: 1200)
+        currentMap.setRegion(currentMap.regionThatFits(zoomRegion), animated: true)
         // Do any additional setup after loading the view.
     }
     

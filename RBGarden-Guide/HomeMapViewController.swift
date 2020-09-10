@@ -14,7 +14,7 @@ class HomeMapViewController: UIViewController {
     weak var exhibitionTableController:ExhibitionTableController!
     var tappedView:MKAnnotationView?
     
-    let RBGCoordinate = CLLocationCoordinate2D( latitude: -37.830328,longitude: 144.979534)
+    
     var locationManager:CLLocationManager = CLLocationManager()
     //var allExhibitionAnnotation:[ExhibitionAnnotation]?
     override func viewDidLoad() {
@@ -28,6 +28,7 @@ class HomeMapViewController: UIViewController {
         
 //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //        databaseController = appDelegate.databaseController
+        let RBGCoordinate = CLLocationCoordinate2D( latitude: -37.830328,longitude: 144.979534)
         let RBGAnnotation : ExhibitionAnnotation = ExhibitionAnnotation(title: "Royal Botanic Garden", subtitle:"Royal Botanic Garden in Melbourne City", coordinate: RBGCoordinate)
         homeMap.addAnnotation(RBGAnnotation)
         focusOn(annotation: RBGAnnotation, latitudinalMeters: 1500, longitudinalMeters: 1200)

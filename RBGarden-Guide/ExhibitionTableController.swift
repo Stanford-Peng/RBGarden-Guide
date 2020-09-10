@@ -5,6 +5,9 @@
 //  Created by Stanford on 7/9/20.
 //  Copyright © 2020 Monash. All rights reserved.
 //
+protocol checkNameDelegate:AnyObject {
+    func checkExhibitionName() -> Bool
+}
 
 import UIKit
 import MapKit
@@ -153,7 +156,7 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
         let exhibition = filteredExhibitions[indexPath.row]
         
         exhibitionCell.name.text = exhibition.exhibitionName
-        exhibitionCell.shortDescription.text = exhibition.exhibitionDescription?.cut(length: 100)
+        exhibitionCell.shortDescription.text = exhibition.exhibitionDescription
         exhibitionCell.icon.image = UIImage(named: exhibition.iconPath!)
         // Configure the cell...
 
@@ -164,7 +167,7 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let exhibition = filteredExhibitions[indexPath.row]
         let locationAnnotation:ExhibitionAnnotation = ExhibitionAnnotation(title: exhibition.exhibitionName!, subtitle: exhibition.exhibitionDescription!, coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
-        homeMapController?.homeMap.addAnnotation(locationAnnotation)
+        homeMapController?.homeMap.addAnnotation(locationAnnotation)// create a new annotation is not a good pratice
         homeMapController?.focusOn(annotation: locationAnnotation, latitudinalMeters: 1000,longitudinalMeters: 1000)
       //  homeMapController?.focusViaCoordinate(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), latitudinalMeters: 1000, longitudinalMeters: 1000)
         if let mapVC = homeMapController {
@@ -223,10 +226,15 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
 
 extension String{
     func cut(length:Int) -> String{
+        //
+        if self.count >= length{
         let index = self.index(self.startIndex,offsetBy: length)
         return String(self[..<index])
+        }else{
+            return self
+        }
     }
-    
+
 }
 
 

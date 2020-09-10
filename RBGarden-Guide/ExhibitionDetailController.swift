@@ -58,9 +58,12 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
         iconImage.image = UIImage(named:eAnnotation.icon!)
         name.text = eAnnotation.title
         exhibitionDescription.text = eAnnotation.subtitle
-        mapView.addAnnotation(eAnnotation)
-        eAnnotation.subtitle = exhibitionDescription.text.cut(length: 30) + "..."
-        mapView.selectAnnotation(eAnnotation, animated: true)
+        
+        
+        //add a new annotation and select it
+        let pin:MKAnnotation = ExhibitionAnnotation(title: eAnnotation.title!, subtitle: eAnnotation.subtitle!.cut(length: 30) + "...", coordinate: eAnnotation.coordinate)
+        mapView.addAnnotation(pin)
+        mapView.selectAnnotation(pin, animated: true)
         
         let zoomRegion = MKCoordinateRegion(center: eAnnotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)

@@ -22,6 +22,8 @@ class ExhibitionBasicCell: UITableViewCell,UITextFieldDelegate, addLocationDeleg
     
     @IBOutlet weak var iconSegment: UISegmentedControl!
     
+    var location_long:Double?
+    var location_lat:Double?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,6 +43,8 @@ class ExhibitionBasicCell: UITableViewCell,UITextFieldDelegate, addLocationDeleg
     }
     
     func addExhibitionLocationDelegate(_ viewController: addLocationViewController, pinCoordinate: CLLocationCoordinate2D) {
+        location_long = pinCoordinate.longitude
+        location_lat = pinCoordinate.latitude
         locationTextField.text = "\(pinCoordinate.latitude),\(pinCoordinate.longitude)"
         
     }

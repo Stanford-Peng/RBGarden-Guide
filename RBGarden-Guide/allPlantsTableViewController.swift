@@ -70,12 +70,20 @@ class allPlantsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let plant = allPlants?[indexPath.row]
-        addPlantToDetailDelegate?.addPlant(plant: plant!)
-        navigationController?.popViewController(animated: false)
+        
+        let plant = allPlants![indexPath.row]
+        if addPlantToDetailDelegate!.addedPlants.contains(plant){
+            self.displayMessage(title: "Alert", message: "The selected plant is already added!")
+        
+        }else{
+            addPlantToDetailDelegate?.addPlant(plant: plant)
+            navigationController?.popViewController(animated: false)
+        }
       //  homeMapController?.focusViaCoordinate(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), latitudinalMeters: 1000, longitudinalMeters: 1000)
 
     }
+    
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -121,4 +129,15 @@ class allPlantsTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension UIViewController{
+    
+    func displayMessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message,
+                                                preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style:
+            UIAlertAction.Style.default,handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
