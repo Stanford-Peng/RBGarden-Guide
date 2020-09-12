@@ -2,7 +2,7 @@
 //  Plant+CoreDataProperties.swift
 //  RBGarden-Guide
 //
-//  Created by Stanford on 8/9/20.
+//  Created by Stanford on 12/9/20.
 //  Copyright © 2020 Monash. All rights reserved.
 //
 //
@@ -21,6 +21,7 @@ extension Plant {
     @NSManaged public var family: String?
     @NSManaged public var plantName: String?
     @NSManaged public var scientificName: String?
+    @NSManaged public var imageUrl: String?
     @NSManaged public var exhibitions: NSSet?
 
 }
@@ -41,3 +42,4 @@ extension Plant {
     @NSManaged public func removeFromExhibitions(_ values: NSSet)
 
 }
+

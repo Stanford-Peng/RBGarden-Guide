@@ -37,11 +37,11 @@ protocol DatabaseProtocol: NSObject {
     
     func cleanup()
     
-    func addPlant(scientificName: String, plantName: String, discoverYear: String, family: String) -> Plant
-    func addExhibition(exhibitionName: String, exhibitionDescription: String, location_long: Double, location_lat: Double, iconPath: String) -> Exhibition
+    func addPlant(scientificName: String, plantName: String, discoverYear: String, family: String) -> Plant?
+    func addExhibition(exhibitionName: String, exhibitionDescription: String, location_long: Double, location_lat: Double, iconPath: String) -> Exhibition?
     //used in add exhibition
     func addPlantToExhibition(plant: Plant, exhibition: Exhibition) -> Bool
-    
+    //used in add an online plant    
     func deletePlant(plant: Plant)
     func deleteExhibition(exhibition: Exhibition)
     func removePlantFromExhibition(plant: Plant, exhibition: Exhibition)

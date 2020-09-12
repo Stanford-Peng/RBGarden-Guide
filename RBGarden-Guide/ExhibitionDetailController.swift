@@ -23,8 +23,8 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let plantCell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath) as! plantCellController
-        let plant = allPlants[indexPath.row]
-        plantCell.scientificName.text = plant.scientificName
+        let plant:Plant = allPlants[indexPath.row]
+        plantCell.scientificNameLabel.text = plant.scientificName
         plantCell.commonName.text = plant.plantName
         plantCell.discoveredYear.text = plant.discoverYear
         return plantCell

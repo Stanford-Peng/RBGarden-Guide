@@ -26,6 +26,7 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
     weak var databaseController : DatabaseProtocol?
     weak var homeMapController:HomeMapViewController?
     
+    
     //forcefully add annotations when lauching
     func addFirstTime(){
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -116,7 +117,7 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
     
     //Confirm to UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text?.lowercased() else {
+        guard let searchText = searchController.searchBar.text else {
             return
         }
         if searchText.count > 0 {

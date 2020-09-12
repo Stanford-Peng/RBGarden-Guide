@@ -11,12 +11,13 @@
     <entity name="Plant" representedClassName="Plant" syncable="YES">
         <attribute name="discoverYear" optional="YES" attributeType="String"/>
         <attribute name="family" optional="YES" attributeType="String"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="plantName" optional="YES" attributeType="String"/>
         <attribute name="scientificName" optional="YES" attributeType="String"/>
         <relationship name="exhibitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exhibition" inverseName="plants" inverseEntity="Exhibition"/>
     </entity>
     <elements>
         <element name="Exhibition" positionX="-63" positionY="-18" width="128" height="133"/>
-        <element name="Plant" positionX="275.6875" positionY="-8.890625" width="128" height="118"/>
+        <element name="Plant" positionX="275.6875" positionY="-8.890625" width="128" height="133"/>
     </elements>
 </model>

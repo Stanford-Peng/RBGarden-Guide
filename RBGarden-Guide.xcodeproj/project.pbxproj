@@ -14,6 +14,9 @@
 		E63B84AB250621AD005E95C3 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63B84AA250621AD005E95C3 /* DatabaseProtocol.swift */; };
 		E63B84AD25062E7C005E95C3 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63B84AC25062E7C005E95C3 /* MulticastDelegate.swift */; };
 		E63B84AF25062F51005E95C3 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63B84AE25062F51005E95C3 /* CoreDataController.swift */; };
+		E66A5EC5250C81A800ADD8B4 /* PlantsVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A5EC4250C81A800ADD8B4 /* PlantsVolume.swift */; };
+		E66A5EC7250C81F500ADD8B4 /* PlantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A5EC6250C81F500ADD8B4 /* PlantData.swift */; };
+		E66A5EC9250C83B200ADD8B4 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A5EC8250C83B200ADD8B4 /* Links.swift */; };
 		E6CFF05D25039ADF001447DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CFF05C25039ADF001447DF /* AppDelegate.swift */; };
 		E6CFF05F25039ADF001447DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CFF05E25039ADF001447DF /* SceneDelegate.swift */; };
 		E6CFF06425039ADF001447DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6CFF06225039ADF001447DF /* Main.storyboard */; };
@@ -37,12 +40,14 @@
 		E60575E425049E2300E51DAD /* HomeMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMapViewController.swift; sourceTree = "<group>"; };
 		E60575E625049E8500E51DAD /* ExhibitionAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionAnnotation.swift; sourceTree = "<group>"; };
 		E60575E82504DF4F00E51DAD /* RBG.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = RBG.gpx; sourceTree = "<group>"; };
-		E60575E92504DF7D00E51DAD /* universityGeoscience.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = universityGeoscience.gpx; path = ../../lab/week5/universityGeoscience.gpx; sourceTree = "<group>"; };
 		E60575EA250537AF00E51DAD /* ExhibitionTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionTableController.swift; sourceTree = "<group>"; };
 		E60575EC2505380900E51DAD /* AddExhibitionTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExhibitionTableController.swift; sourceTree = "<group>"; };
 		E63B84AA250621AD005E95C3 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		E63B84AC25062E7C005E95C3 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		E63B84AE25062F51005E95C3 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		E66A5EC4250C81A800ADD8B4 /* PlantsVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsVolume.swift; sourceTree = "<group>"; };
+		E66A5EC6250C81F500ADD8B4 /* PlantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantData.swift; sourceTree = "<group>"; };
+		E66A5EC8250C83B200ADD8B4 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		E6CFF05925039ADF001447DF /* RBGarden-Guide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RBGarden-Guide.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6CFF05C25039ADF001447DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6CFF05E25039ADF001447DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,10 +90,19 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
+		E66A5EC3250C817300ADD8B4 /* Decoder */ = {
+			isa = PBXGroup;
+			children = (
+				E66A5EC4250C81A800ADD8B4 /* PlantsVolume.swift */,
+				E66A5EC6250C81F500ADD8B4 /* PlantData.swift */,
+				E66A5EC8250C83B200ADD8B4 /* Links.swift */,
+			);
+			path = Decoder;
+			sourceTree = "<group>";
+		};
 		E6CFF05025039ADF001447DF = {
 			isa = PBXGroup;
 			children = (
-				E60575E92504DF7D00E51DAD /* universityGeoscience.gpx */,
 				E60575E82504DF4F00E51DAD /* RBG.gpx */,
 				E6CFF05B25039ADF001447DF /* RBGarden-Guide */,
 				E6CFF05A25039ADF001447DF /* Products */,
@@ -106,6 +120,7 @@
 		E6CFF05B25039ADF001447DF /* RBGarden-Guide */ = {
 			isa = PBXGroup;
 			children = (
+				E66A5EC3250C817300ADD8B4 /* Decoder */,
 				E6EDE5D7250A435A007C4B55 /* Delegate */,
 				E6D7D35B25071EE6002048A3 /* Cells */,
 				E63B84A925062173005E95C3 /* Database */,
@@ -229,11 +244,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6D7D35D25071F09002048A3 /* ExhibitionTableCell.swift in Sources */,
+				E66A5EC5250C81A800ADD8B4 /* PlantsVolume.swift in Sources */,
 				E60575EB250537AF00E51DAD /* ExhibitionTableController.swift in Sources */,
 				E6CFF0762503B00F001447DF /* RBGModel.xcdatamodeld in Sources */,
 				E6EDE5D9250A4390007C4B55 /* Delegate.swift in Sources */,
 				E60575ED2505380900E51DAD /* AddExhibitionTableController.swift in Sources */,
 				E6E5A45C25086C7400B30B1A /* addLocationViewController.swift in Sources */,
+				E66A5EC7250C81F500ADD8B4 /* PlantData.swift in Sources */,
 				E60575E725049E8500E51DAD /* ExhibitionAnnotation.swift in Sources */,
 				E60575E525049E2300E51DAD /* HomeMapViewController.swift in Sources */,
 				E6EDE5D6250A3829007C4B55 /* allPlantsTableViewController.swift in Sources */,
@@ -241,6 +258,7 @@
 				E63B84AD25062E7C005E95C3 /* MulticastDelegate.swift in Sources */,
 				E63B84AB250621AD005E95C3 /* DatabaseProtocol.swift in Sources */,
 				E6E5A45E2509057100B30B1A /* ExhibitionDetailController.swift in Sources */,
+				E66A5EC9250C83B200ADD8B4 /* Links.swift in Sources */,
 				E6D7D3662507C18E002048A3 /* Exhibition+CoreDataClass.swift in Sources */,
 				E6E1B4F125092AF3006C256C /* plantCellController.swift in Sources */,
 				E63B84AF25062F51005E95C3 /* CoreDataController.swift in Sources */,

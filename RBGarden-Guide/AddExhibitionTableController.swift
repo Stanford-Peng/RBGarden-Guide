@@ -31,13 +31,17 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
-        allPlants = databaseController?.fetchAllPlants()
+        //allPlants = databaseController?.fetchAllPlants()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        allPlants = databaseController?.fetchAllPlants()
     }
     
     // MARK: - Table view data source
@@ -69,11 +73,28 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
             cell.selectionStyle = .gray
             return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "plantCellAdded", for: indexPath) as! plantCellController
+        let cell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath) as! plantCellController
+        
         let plant = addedPlants[indexPath.row - 1]
-        cell.commonName.text = plant.plantName
-        cell.scientificName.text = plant.scientificName
-        cell.discoveredYear.text = plant.discoverYear
+        
+        if let commonName = plant.plantName{
+            cell.commonName.text = commonName
+        }else{
+            cell.commonName.text = "No Common Name"
+        }
+        
+        if let scientificName = plant.scientificName {
+            cell.scientificNameLabel.text = scientificName
+        }else{
+            cell.scientificNameLabel.text = "No Scientific Name"
+        }
+        
+        if let discoverYear = plant.discoverYear{
+            cell.discoveredYear.text = discoverYear
+        }else{
+            cell.discoveredYear.text = "No Year"
+        }
+        
         return cell
     }
     
@@ -179,8 +200,7 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
         let basicCell = tableView.cellForRow(at: indexPath) as! ExhibitionBasicCell
         
         if !(basicCell.nameTextfield.text?.isEmpty ?? false) && !(basicCell.descriptionTextField.text?.isEmpty ?? false) && !(basicCell.locationTextField.text?.isEmpty ?? false) && addedPlants.count >= 3 {
-            let exhibitionName = basicCell.nameTextfield.text
-            
+            let exhibitionName = basicCell.nameTextfield.text            
             let exhibitionDescription = basicCell.descriptionTextField.text
             let location_long = basicCell.location_long
             let location_lat = basicCell.location_lat
@@ -191,6 +211,7 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
                 let _ = databaseController?.addPlantToExhibition(plant: plant, exhibition: addedExhibition!)
             }
             navigationController?.popViewController(animated: true)
+            databaseController?.cleanup()
             displayMessage(title: "Successful", message: "The new exhibition is added!")
             
         } else{
