@@ -37,7 +37,7 @@ protocol DatabaseProtocol: NSObject {
     
     func cleanup()
     
-    func addPlant(scientificName: String, plantName: String, discoverYear: String, family: String) -> Plant?
+    func addPlant(scientificName: String, plantName: String, discoverYear: String, family: String, imageUrl:String) -> Plant?
     func addExhibition(exhibitionName: String, exhibitionDescription: String, location_long: Double, location_lat: Double, iconPath: String) -> Exhibition?
     //used in add exhibition
     func addPlantToExhibition(plant: Plant, exhibition: Exhibition) -> Bool
@@ -56,7 +56,8 @@ protocol DatabaseProtocol: NSObject {
     
     //add for adding plant on creating exhibition screen
     func fetchAllPlants() -> [Plant]
-    
+    //add for editing exhibition and exhibition detail screen
+    func fetchOneExhibitionByName(exhibitionName:String) -> Exhibition?
 }
 
 //scientificName: String?

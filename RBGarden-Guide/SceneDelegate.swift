@@ -7,11 +7,11 @@
 //
 
 import UIKit
-
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+import CoreLocation
+class SceneDelegate: UIResponder, UIWindowSceneDelegate{
 
     var window: UIWindow?
-
+    let locationManager = CLLocationManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -32,7 +32,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         exhibitionTableViewController.homeMapController = mapViewController
         mapViewController.exhibitionTableController = exhibitionTableViewController
         
-        // give 
+        // request location and initialize user notofication
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        let options: UNAuthorizationOptions = [.badge, .sound, .alert]
+        UNUserNotificationCenter.current()
+          .requestAuthorization(options: options) { success, error in
+            if let error = error {
+              print("Error: \(error)")
+            }
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -45,6 +55,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
+        //If scene is activ, there is no need to use notifications
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -68,3 +82,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate: CLLocationManagerDelegate {
+    
+    
+    func handleEvent(for region: CLRegion!, action : String) {
+      // Show an alert if application is active
+      let message = "You have \(action)ed \(region.identifier)"
+      if UIApplication.shared.applicationState == .active {
+        window?.rootViewController?.displayMessage(title: "Attention", message: message)
+      } else {
+        // Otherwise present a local notification
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.body = message
+        notificationContent.sound = UNNotificationSound.default
+        notificationContent.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: "location_change",
+                                            content: notificationContent,
+                                            trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+          if let error = error {
+            print("Error: \(error)")
+          }
+        }
+      }
+    }
+  
+  func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+    if region is CLCircularRegion {
+
+      handleEvent(for: region, action: "enter")
+    }
+  }
+  
+  func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+    if region is CLCircularRegion {
+      handleEvent(for: region,action: "exit")
+    }
+  }
+}

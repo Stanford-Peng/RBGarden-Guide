@@ -8,11 +8,44 @@
 
 import UIKit
 import MapKit
-class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITableViewDelegate, DatabaseListener{
+    
+    var listenerType: ListenerType = .exhibition
+    
+    var sort: Bool?
+    
+    var plant: Plant?
+    
+    var exhibition: Exhibition?
+    
+    func onExhibitionTableChange(change: DatabaseChange, exhibitions: [Exhibition]) {
+        
+    }
+    
+    func onPlantTableChange(change: DatabaseChange, plants: [Plant]) {
+        
+    }
+    
+    func OnExhibitionChange(change: DatabaseChange, exhibition: Exhibition?, exhibitionPlants: [Plant]) {
+        self.exhibition = exhibition
+        self.allPlants = exhibitionPlants
+    }
+    
+    func OnPlantChange(change: DatabaseChange, plant: Plant?) {
+        
+    }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
     
-    //customize table data source differently
+    //customize table data source differently for plants
     func numberOfSections(in tableView: UITableView) -> Int {
          // #warning Incomplete implementation, return the number of sections
             return 1
@@ -24,10 +57,46 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let plantCell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath) as! plantCellController
         let plant:Plant = allPlants[indexPath.row]
-        plantCell.scientificNameLabel.text = plant.scientificName
-        plantCell.commonName.text = plant.plantName
-        plantCell.discoveredYear.text = plant.discoverYear
+        
+        if plant.scientificName != nil && plant.scientificName != ""{
+            plantCell.scientificNameLabel.text = plant.scientificName
+        }else{
+            plantCell.scientificNameLabel.text = "No Scientific Name"
+        }
+        
+        if plant.plantName != nil && plant.plantName != ""{
+            plantCell.commonName.text = plant.plantName
+        }else{
+            plantCell.commonName.text = "No Common Name"
+        }
+        
+        if plant.discoverYear != nil && plant.discoverYear != ""{
+            plantCell.discoveredYear.text = plant.discoverYear
+        }else{
+            plantCell.discoveredYear.text = "No Discover Year"
+        }
+        
+        //plantCell.commonName.text = plant.plantName
+        //plantCell.discoveredYear.text = plant.discoverYear
+        
         return plantCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPlant = allPlants[indexPath.row]
+        performSegue(withIdentifier: "goToPlant", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToPlant" {
+            let plantDetailViewController = segue.destination as! PlantDetailViewController
+            plantDetailViewController.selectedPlant = selectedPlant
+        }
+        if segue.identifier == "editExhibition"{
+            let editExhibitionController = segue.destination as! EditExhibitionController
+            editExhibitionController.selectedExhibition = exhibition
+            editExhibitionController.allPlants = allPlants
+        }
     }
     
     //Arrange your custom row height
@@ -39,6 +108,10 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
     var exhibitionAnnotation:ExhibitionAnnotation?
     weak var databaseController : DatabaseProtocol?
     var allPlants:[Plant] = []
+    var selectedPlant:Plant?
+    //var selectedExhibition:Exhibition?
+    //for edit exhibition delegate
+    //var addedPlants:[Plant] = []
     @IBOutlet weak var iconImage: UIImageView!
     
     @IBOutlet weak var plantTableView: UITableView!
@@ -55,24 +128,32 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
         guard let eAnnotation = exhibitionAnnotation else{
             return
         }
-        iconImage.image = UIImage(named:eAnnotation.icon!)
-        name.text = eAnnotation.title
-        exhibitionDescription.text = eAnnotation.subtitle
+        //assign coredata controller
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
+        exhibition = databaseController!.fetchOneExhibitionByName(exhibitionName: eAnnotation.title!)
+        
+        iconImage.image = UIImage(named:exhibition!.iconPath!)
+        name.text = exhibition!.exhibitionName!
+        exhibitionDescription.text = exhibition!.exhibitionDescription
         
         
         //add a new annotation and select it
-        let pin:MKAnnotation = ExhibitionAnnotation(title: eAnnotation.title!, subtitle: eAnnotation.subtitle!.cut(length: 30) + "...", coordinate: eAnnotation.coordinate)
+        let pin:MKAnnotation = ExhibitionAnnotation(title: exhibition!.exhibitionName!, subtitle: exhibition!.exhibitionDescription!.cut(length: 30) + "...", coordinate: CLLocationCoordinate2D(latitude: exhibition!.location_lat, longitude: exhibition!.location_long))
+        
         mapView.addAnnotation(pin)
         mapView.selectAnnotation(pin, animated: true)
         
         let zoomRegion = MKCoordinateRegion(center: eAnnotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        databaseController = appDelegate.databaseController
+
         
         allPlants = databaseController!.fetchExhibitionPlants(exhibitionName: eAnnotation.title!)
+        //addedPlants = allPlants
         
     }
+    
+    
     
     // MARK: - Table view data source
 //

@@ -21,7 +21,7 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
     let BASIC_SECTION = 0
     let PLANT_SECTION = 1
     var basicCell:UITableViewCell?
-    var allPlants:[Plant]?
+    //var allPlants:[Plant]?
     var addedPlants:[Plant] = []
     
     
@@ -40,9 +40,9 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        allPlants = databaseController?.fetchAllPlants()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        allPlants = databaseController?.fetchAllPlants()
+//    }
     
     // MARK: - Table view data source
     
@@ -127,7 +127,7 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        if indexPath.section == 1{
+        if indexPath.section == 1 && indexPath.row > 0 {
             return true
         }
         return false
@@ -182,12 +182,12 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
         }
         if segue.identifier == "goToPlantTable"{
             let controller = segue.destination as! allPlantsTableViewController
-            controller.allPlants = self.allPlants
+            //controller.allPlants = self.allPlants
             controller.addPlantToDetailDelegate = self
         }
     }
     
-    
+    //AddPlantToDetailDelegate
     func addPlant(plant: Plant) {
         addedPlants.append(plant)
         tableView.reloadSections([1], with: .automatic)
@@ -215,11 +215,17 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
             displayMessage(title: "Successful", message: "The new exhibition is added!")
             
         } else{
-            displayMessage(title: "Empty Required Field", message: "Please fill in the fields first!")
+            displayMessage(title: "Empty Required Field", message: "Please fill in the fields first and add at least three plants!")
         }
         
     }
     
+    
+    
+}
+
+
+extension UITableViewController{
     func convertIntToIcon(segmentInt:Int) -> String{
         switch segmentInt {
         case 0:
@@ -241,5 +247,4 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
         }
         
     }
-    
 }

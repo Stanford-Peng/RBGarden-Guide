@@ -35,6 +35,9 @@ class addLocationViewController: UIViewController {
     }
     
     @IBAction func zoomToUserLocation(_ sender: Any) {
+        if CLLocationManager.authorizationStatus() != .authorizedAlways && CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
+          displayMessage(title: "Warning", message: "You have to grant RBGGarden-Guide permission to access the device location before using this feature")
+        }
         currentMap.zoomToUserLocation()
     }
     

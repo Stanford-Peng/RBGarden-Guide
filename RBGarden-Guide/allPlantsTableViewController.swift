@@ -45,13 +45,16 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
         
         //add indicator
         self.view.addSubview(indicator)
-        //populate filteredPlants
-        updateSearchResults(for: navigationItem.searchController!)
         
         //add database controller
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         
+        allPlants = databaseController.fetchAllPlants()
+        //populate filteredPlants
+        updateSearchResults(for: navigationItem.searchController!)
+        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -173,7 +176,8 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
         let discoverYear = (plantData.discoveredYear ?? 0) == 0 ? "" : String((plantData.discoveredYear ?? 0))
         let plantName = plantData.plantName ?? ""
         let family = plantData.family ?? ""
-        plant = databaseController.addPlant(scientificName : scientificName , plantName : plantName, discoverYear : discoverYear, family : family)
+        let imageUrl = plantData.imageUrl ?? ""
+        plant = databaseController.addPlant(scientificName : scientificName , plantName : plantName, discoverYear : discoverYear, family : family, imageUrl: imageUrl)
         return plant
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

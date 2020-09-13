@@ -24,15 +24,13 @@ class HomeMapViewController: UIViewController {
             locationManager.requestWhenInUseAuthorization()
         }
 
-        
-        
 //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //        databaseController = appDelegate.databaseController
-        let RBGCoordinate = CLLocationCoordinate2D( latitude: -37.830328,longitude: 144.979534)
-        let RBGAnnotation : ExhibitionAnnotation = ExhibitionAnnotation(title: "Royal Botanic Garden", subtitle:"Royal Botanic Garden in Melbourne City", coordinate: RBGCoordinate)
+        let RBGAnnotation  = LocationAnnotation(title: "Royal Botanic Garden", subtitle:"Royal Botanic Garden in Melbourne City", lat: -37.830328,long: 144.979534)
         homeMap.addAnnotation(RBGAnnotation)
         focusOn(annotation: RBGAnnotation, latitudinalMeters: 1500, longitudinalMeters: 1200)
-        
+    
+        //delegate mapview methods
         homeMap.delegate = self
 //        let allExhibitions = databaseController?.fetchAllExhibitions(sort: true)
 //        for exhibition:Exhibition in allExhibitions! {
@@ -41,20 +39,30 @@ class HomeMapViewController: UIViewController {
 //            homeMap.addAnnotation(exhibitionAnnotation)
 //            allExhibitionAnnotation?.append(exhibitionAnnotation)
 //        }
-        exhibitionTableController.addFirstTime()
         
+        //add annotationa and geofences for the first time
+        exhibitionTableController.addFirstTime()
+         exhibitionTableController.addGeofencesForAllExhibitions()
         // Do any additional setup after loading the view.
 
     }
     
     //MARK: focus on a single annotation/self-write
     func focusOn(annotation:MKAnnotation, latitudinalMeters: Double, longitudinalMeters: Double){
+        if CLLocationManager.authorizationStatus() != .authorizedAlways && CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
+          displayMessage(title: "Warning", message: "You have to grant RBGGarden-Guide permission to access the device location before using this feature")
+            locationManager.requestAlwaysAuthorization()
+        }
         homeMap.selectAnnotation(annotation, animated: true)
         let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters)
         homeMap.setRegion(homeMap.regionThatFits(zoomRegion), animated: true)
     }
     
     func focusViaCoordinate(center:CLLocationCoordinate2D, latitudinalMeters: Double, longitudinalMeters: Double){
+        if CLLocationManager.authorizationStatus() != .authorizedAlways && CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
+          displayMessage(title: "Warning", message: "You have to grant RBGGarden-Guide permission to access the device location before using this feature")
+          locationManager.requestAlwaysAuthorization()
+        }
         let zoomRegion = MKCoordinateRegion(center: center, latitudinalMeters: latitudinalMeters, longitudinalMeters: longitudinalMeters)
         homeMap.setRegion(homeMap.regionThatFits(zoomRegion), animated: true)
         
@@ -149,6 +157,7 @@ extension HomeMapViewController: MKMapViewDelegate {
 
 extension MKMapView{
     func zoomToUserLocation() {
+        
       guard let coordinate = userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
       setRegion(region, animated: true)

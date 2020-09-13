@@ -14,7 +14,7 @@ class PlantData: NSObject, Decodable {
     var scientificName : String?
     
     var family : String?
-    var intYear : Int?
+    //var intYear : Int?
     var discoveredYear : Int?
     var imageUrl : String?
     
@@ -27,9 +27,13 @@ class PlantData: NSObject, Decodable {
         case imageUrl = "image_url"
     }
     
-//    init(from decoder:Decoder) throws{
-//
+    
+//    required init(from decoder:Decoder) throws{
+//        let container = try? decoder.container(keyedBy: CodingKeys.self)
+//        intYear = try? container?.decode(Int.self, forKey: .intYear)
 //        discoveredYear = String(intYear!)
-//    }
 //
+//
+//    }
+
 }
