@@ -156,6 +156,7 @@ class CoreDataController: NSObject,NSFetchedResultsControllerDelegate, DatabaseP
     func fetchExhibitionPlants(exhibitionName:String) -> [Plant] {
         let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
         let nameSortDescriptor = NSSortDescriptor(key: "plantName", ascending: true)
+        print(exhibitionName)
         let predicate = NSPredicate(format: "ANY exhibitions.exhibitionName == %@", exhibitionName)
         fetchRequest.sortDescriptors = [nameSortDescriptor]
         fetchRequest.predicate = predicate

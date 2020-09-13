@@ -182,6 +182,8 @@ class EditExhibitionController: UITableViewController, AddPlantToDetailDelegate 
     //Save editting content
     
     @IBAction func saveEditing(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let databaseController = appDelegate.databaseController
         let indexPath = IndexPath(row: 0, section: 0)
         let basicCell = tableView.cellForRow(at: indexPath) as! ExhibitionBasicCell
         if addedPlants.count < 3 {
@@ -206,6 +208,12 @@ class EditExhibitionController: UITableViewController, AddPlantToDetailDelegate 
         
         //edit value by value
         if basicCell.nameTextfield.text != selectedExhibition?.exhibitionName{
+            if let name = basicCell.nameTextfield.text{ 
+                 if let _ = databaseController?.fetchOneExhibitionByName(exhibitionName: name){
+                     displayMessage(title: "Alert", message: "This exhibition is already taken!")
+                     return
+                 }
+             }
             selectedExhibition?.exhibitionName = basicCell.nameTextfield.text
         }
         if basicCell.descriptionTextField.text != selectedExhibition?.exhibitionDescription{
@@ -231,8 +239,11 @@ class EditExhibitionController: UITableViewController, AddPlantToDetailDelegate 
             //                }
             //            }
         }
-        navigationController?.popViewController(animated: false)
-        navigationController?.popViewController(animated: false)
+
+        databaseController?.cleanup()
+        //navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+        
         //navigationController?.dismiss(animated: true, completion: nil)
         //navigationController?.popViewController(animated: <#T##Bool#>)
         //navigationController?.pushViewController(navigationController!, animated: true)

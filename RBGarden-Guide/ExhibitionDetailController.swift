@@ -29,6 +29,9 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
     func OnExhibitionChange(change: DatabaseChange, exhibition: Exhibition?, exhibitionPlants: [Plant]) {
         self.exhibition = exhibition
         self.allPlants = exhibitionPlants
+        plantTableView.reloadData()
+        
+        
     }
     
     func OnPlantChange(change: DatabaseChange, plant: Plant?) {
@@ -38,7 +41,25 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //print(exhibition?.exhibitionName!)
+        //exhibition = databaseController!.fetchOneExhibitionByName(exhibitionName: (exhibitionAnnotation?.title)!)
         databaseController?.addListener(listener: self)
+        //reload everything
+        iconImage.image = UIImage(named:exhibition!.iconPath!)
+        name.text = exhibition!.exhibitionName!
+        exhibitionDescription.text = exhibition!.exhibitionDescription
+        //readd annotation
+        let annotations = mapView.annotations
+        mapView.removeAnnotations(annotations)
+        
+        let pin:MKAnnotation = ExhibitionAnnotation(title: exhibition!.exhibitionName!, subtitle: exhibition!.exhibitionDescription!.cut(length: 30) + "...", coordinate: CLLocationCoordinate2D(latitude: exhibition!.location_lat, longitude: exhibition!.location_long))
+        
+        mapView.addAnnotation(pin)
+        mapView.selectAnnotation(pin, animated: true)
+        
+        let zoomRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -47,9 +68,9 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
     
     //customize table data source differently for plants
     func numberOfSections(in tableView: UITableView) -> Int {
-         // #warning Incomplete implementation, return the number of sections
-            return 1
-     }
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allPlants.count
     }
@@ -131,24 +152,25 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
         //assign coredata controller
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
-        exhibition = databaseController!.fetchOneExhibitionByName(exhibitionName: eAnnotation.title!)
         
-        iconImage.image = UIImage(named:exhibition!.iconPath!)
-        name.text = exhibition!.exhibitionName!
-        exhibitionDescription.text = exhibition!.exhibitionDescription
+        exhibition = databaseController!.fetchOneExhibitionByName(exhibitionName: (eAnnotation.title)!)
+        
+        //        iconImage.image = UIImage(named:exhibition!.iconPath!)
+        //        name.text = exhibition!.exhibitionName!
+        //        exhibitionDescription.text = exhibition!.exhibitionDescription
+        //
+        //
+        //        //add a new annotation and select it
+        //        let pin:MKAnnotation = ExhibitionAnnotation(title: exhibition!.exhibitionName!, subtitle: exhibition!.exhibitionDescription!.cut(length: 30) + "...", coordinate: CLLocationCoordinate2D(latitude: exhibition!.location_lat, longitude: exhibition!.location_long))
+        //
+        //        mapView.addAnnotation(pin)
+        //        mapView.selectAnnotation(pin, animated: true)
+        //
+        //        let zoomRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        //        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
         
         
-        //add a new annotation and select it
-        let pin:MKAnnotation = ExhibitionAnnotation(title: exhibition!.exhibitionName!, subtitle: exhibition!.exhibitionDescription!.cut(length: 30) + "...", coordinate: CLLocationCoordinate2D(latitude: exhibition!.location_lat, longitude: exhibition!.location_long))
-        
-        mapView.addAnnotation(pin)
-        mapView.selectAnnotation(pin, animated: true)
-        
-        let zoomRegion = MKCoordinateRegion(center: eAnnotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
-
-        
-        allPlants = databaseController!.fetchExhibitionPlants(exhibitionName: eAnnotation.title!)
+        //allPlants = databaseController!.fetchExhibitionPlants(exhibitionName: (exhibition?.exhibitionName)!)
         //addedPlants = allPlants
         
     }
@@ -156,36 +178,36 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
     
     
     // MARK: - Table view data source
-//
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 1
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//
-//        return allPlants.count
-//    }
-//
-//    //Arrange your custom row height
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 64;
-//    }
-//
-//
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let plantCell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath) as! plantCellController
-//        let plant = allPlants[indexPath.row]
-//        plantCell.scientificName.text = plant.scientificName
-//
-////        exhibitionCell.name.text = exhibition.exhibitionName
-////        exhibitionCell.shortDescription.text = exhibition.exhibitionDescription?.cut(length: 100)
-////        exhibitionCell.icon.image = UIImage(named: exhibition.iconPath!)
-//        // Configure the cell...
-//
-//        return plantCell
-//    }
+    //
+    //    override func numberOfSections(in tableView: UITableView) -> Int {
+    //        // #warning Incomplete implementation, return the number of sections
+    //        return 1
+    //    }
+    //
+    //    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //        // #warning Incomplete implementation, return the number of rows
+    //
+    //        return allPlants.count
+    //    }
+    //
+    //    //Arrange your custom row height
+    //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        return 64;
+    //    }
+    //
+    //
+    //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //        let plantCell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath) as! plantCellController
+    //        let plant = allPlants[indexPath.row]
+    //        plantCell.scientificName.text = plant.scientificName
+    //
+    ////        exhibitionCell.name.text = exhibition.exhibitionName
+    ////        exhibitionCell.shortDescription.text = exhibition.exhibitionDescription?.cut(length: 100)
+    ////        exhibitionCell.icon.image = UIImage(named: exhibition.iconPath!)
+    //        // Configure the cell...
+    //
+    //        return plantCell
+    //    }
     
-
+    
 }

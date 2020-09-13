@@ -27,84 +27,84 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
     weak var homeMapController:HomeMapViewController?
     
     var locationManager = CLLocationManager()
-    let RADIUS:Double = 250
+
     //add geofencing
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate//repeat addFirstTime(should be removed)
     
-    func addGeofencesForAllExhibitions(){
-        
-        for exhibition in allExhibitions{
-            let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), radius: RADIUS, identifier: exhibition.exhibitionName!)
-            startMonitoring(region: region)
-        }
-    }
-    
-    //remove all geofencing
-    func stopMonitoringAll() {
-        for region in locationManager.monitoredRegions {
-            locationManager.stopMonitoring(for: region)
-        }
-    }
-    
-    //Customize monitoring function
-    func startMonitoring(region:CLCircularRegion) {
-        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-            displayMessage(title: "Error", message: "Geofencing is not supported on this device!")
-            return
-        }
-        
-        if CLLocationManager.authorizationStatus() != .authorizedAlways && CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
-            displayMessage(title: "Warning", message: "You have to grant RBGGarden-Guide permission to access the device location before using geonotification")
-        }
-        
-        locationManager.startMonitoring(for: region)
-    }
+//    func addGeofencesForAllExhibitions(){
+//        
+//        for exhibition in allExhibitions{
+//            let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), radius: RADIUS, identifier: exhibition.exhibitionName!)
+//            startMonitoring(region: region)
+//        }
+//    }
+//    
+//    //remove all geofencing
+//    func stopMonitoringAll() {
+//        for region in locationManager.monitoredRegions {
+//            locationManager.stopMonitoring(for: region)
+//        }
+//    }
+//    
+//    //Customize monitoring function
+//    func startMonitoring(region:CLCircularRegion) {
+//        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
+//            displayMessage(title: "Error", message: "Geofencing is not supported on this device!")
+//            return
+//        }
+//        
+//        if CLLocationManager.authorizationStatus() != .authorizedAlways && CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
+//            displayMessage(title: "Warning", message: "You have to grant RBGGarden-Guide permission to access the device location before using geonotification")
+//        }
+//        
+//        locationManager.startMonitoring(for: region)
+//    }
     
     
     //forcefully add annotations when lauching
-    func addFirstTime(){
-        
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        databaseController = appDelegate.databaseController
-        allExhibitions = (databaseController?.fetchAllExhibitions(sort: sort!))!
-        addExhibitionAnnotations(exhibitionSet: allExhibitions)
-    }
-    
-    //Add annotation
-    func addExhibitionAnnotations(exhibitionSet:[Exhibition]){
-        //let allExhibitions = databaseController?.fetchAllExhibitions(sort: true)
-        
-        if let annotations = homeMapController?.homeMap.annotations{
-            for annotation in annotations{
-                if let exhibitionAnnotation = annotation as? ExhibitionAnnotation{
-                    homeMapController?.homeMap.removeAnnotation(exhibitionAnnotation)
-                }
-            }
-        }
-        //        let RBGCoordinate = CLLocationCoordinate2D( latitude: -37.830328,longitude: 144.979534)
-        //        let RBGAnnotation : ExhibitionAnnotation = ExhibitionAnnotation(title: "Royal Botanic Garden", subtitle:"Royal Botanic Garden in Melbourne City", coordinate: RBGCoordinate)
-        //        homeMapController?.homeMap.addAnnotation(RBGAnnotation)
-        //        homeMapController?.focusOn(annotation: RBGAnnotation, latitudinalMeters: 1500, longitudinalMeters: 1200)
-        
-        var annotationSet:[ExhibitionAnnotation] = []
-        for exhibition:Exhibition in exhibitionSet {
-            let exhibitionAnnotation = ExhibitionAnnotation(title:exhibition.exhibitionName!, subtitle:exhibition.exhibitionDescription!, coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
-            //exhibitionAnnotation.
-            homeMapController?.homeMap.addAnnotation(exhibitionAnnotation)
-            annotationSet.append(exhibitionAnnotation)
-        }
-        homeMapController?.homeMap.addAnnotations(annotationSet)
-    }
+//    func addFirstTime(){
+//        
+////        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        databaseController = appDelegate.databaseController
+//        allExhibitions = (databaseController?.fetchAllExhibitions(sort: sort!))!
+//        addExhibitionAnnotations(exhibitionSet: allExhibitions)
+//    }
+//    
+//    //Add annotation
+//    func addExhibitionAnnotations(exhibitionSet:[Exhibition]){
+//        //let allExhibitions = databaseController?.fetchAllExhibitions(sort: true)
+//        
+//        if let annotations = homeMapController?.homeMap.annotations{
+//            for annotation in annotations{
+//                if let exhibitionAnnotation = annotation as? ExhibitionAnnotation{
+//                    homeMapController?.homeMap.removeAnnotation(exhibitionAnnotation)
+//                }
+//            }
+//        }
+//        //        let RBGCoordinate = CLLocationCoordinate2D( latitude: -37.830328,longitude: 144.979534)
+//        //        let RBGAnnotation : ExhibitionAnnotation = ExhibitionAnnotation(title: "Royal Botanic Garden", subtitle:"Royal Botanic Garden in Melbourne City", coordinate: RBGCoordinate)
+//        //        homeMapController?.homeMap.addAnnotation(RBGAnnotation)
+//        //        homeMapController?.focusOn(annotation: RBGAnnotation, latitudinalMeters: 1500, longitudinalMeters: 1200)
+//        
+//        var annotationSet:[ExhibitionAnnotation] = []
+//        for exhibition:Exhibition in exhibitionSet {
+//            let exhibitionAnnotation = ExhibitionAnnotation(title:exhibition.exhibitionName!, subtitle:exhibition.exhibitionDescription!, coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
+//            //exhibitionAnnotation.
+//            homeMapController?.homeMap.addAnnotation(exhibitionAnnotation)
+//            annotationSet.append(exhibitionAnnotation)
+//        }
+//        homeMapController?.homeMap.addAnnotations(annotationSet)
+//    }
     
     //to initialize and listen to all the exhibitions
     func onExhibitionTableChange(change: DatabaseChange, exhibitions: [Exhibition]) {
         allExhibitions = exhibitions
-        tableView.reloadData()
-        addExhibitionAnnotations(exhibitionSet: allExhibitions)
+        //tableView.reloadData()
+        //addExhibitionAnnotations(exhibitionSet: allExhibitions)
         //addFirstTime()
-        stopMonitoringAll()
-        addGeofencesForAllExhibitions()
+        //stopMonitoringAll()
+        //addGeofencesForAllExhibitions()
         updateSearchResults(for: navigationItem.searchController!)
         //homeMapController?.homeMap.clear
         //addExhibitionAnnotations(exhibitionSet: filteredExhibitions)
@@ -222,13 +222,17 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let exhibition = filteredExhibitions[indexPath.row]
-        let locationAnnotation:ExhibitionAnnotation = ExhibitionAnnotation(title: exhibition.exhibitionName!, subtitle: exhibition.exhibitionDescription!, coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
+        let locationAnnotation:MKAnnotation = ExhibitionAnnotation(title: exhibition.exhibitionName!, subtitle: exhibition.exhibitionDescription!, coordinate: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), icon: exhibition.iconPath!)
+        //remove in advance so that selected one will not be removed
+        homeMapController?.removeAllExhAnnotations()
+        homeMapController?.selectedViaTable = true
         homeMapController?.homeMap.addAnnotation(locationAnnotation)// create a new annotation is not a good pratice
-        homeMapController?.focusOn(annotation: locationAnnotation, latitudinalMeters: 1000,longitudinalMeters: 1000)
+        
         //  homeMapController?.focusViaCoordinate(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), latitudinalMeters: 1000, longitudinalMeters: 1000)
         if let mapVC = homeMapController {
             splitViewController?.showDetailViewController(mapVC, sender: nil)
         }
+        homeMapController?.focusOn(annotation: locationAnnotation, latitudinalMeters: 1000,longitudinalMeters: 1000)
     }
     
     
