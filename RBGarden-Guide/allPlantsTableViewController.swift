@@ -71,10 +71,10 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 && fetchedPlantData.count == 0{
+        if section == 0 && !isFetchOnline{
             return filteredPlants!.count
         }
-        else if section == 0 && fetchedPlantData.count > 0{
+        else if section == 0 && isFetchOnline{
             return fetchedPlantData.count
             
         }
@@ -85,7 +85,7 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "plantCell", for: indexPath) as! plantCellController
             //var plant : AnyObject?
-            if fetchedPlantData.count == 0{
+            if !isFetchOnline{
                 let plant = filteredPlants![indexPath.row]
                 if let commonName = plant.plantName{
                     cell.commonName.text = commonName
@@ -104,7 +104,7 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
                 }else{
                     cell.discoveredYear.text = "No Year"
                 }
-            }else{
+            }else if isFetchOnline {
                 let plant = fetchedPlantData[indexPath.row]
                 if let commonName = plant.plantName{
                     cell.commonName.text = commonName
@@ -209,7 +209,7 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
         guard let searchText = searchController.searchBar.text else {
             return
         }
-        isFetchOnline = false
+        
         if searchText.count > 0 {
             filteredPlants = allPlants!.filter({ (plant: Plant) -> Bool in
                 guard let name = plant.plantName, let scientificName = plant.scientificName else{
@@ -220,6 +220,7 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
         } else {
             filteredPlants = allPlants
         }
+        isFetchOnline = false
         tableView.reloadData()
     }
     
@@ -228,16 +229,17 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         // If there is no text end immediately
         guard let searchText = searchBar.text, searchText.count > 0 else {
+            //updateSearchResults(for: navigationItem.searchController!)
             return;
         }
-        isFetchOnline = true
+        
         indicator.startAnimating()
         indicator.backgroundColor = UIColor.clear
+        
         //filteredPlants?.removeAll()
         fetchedPlantData.removeAll()
         
         //tableView.reloadData()
-        
         URLSession.shared.invalidateAndCancel()
         
         requestPlants(plantName: searchText)
@@ -265,6 +267,7 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
                     //let plants = try decoder.decode(PlantData.self, from: plantsData)
                     self.fetchedPlantData.append(contentsOf: plantsData)
                     DispatchQueue.main.async {
+                        self.isFetchOnline = true
                         self.tableView.reloadData()
                     }
                 }

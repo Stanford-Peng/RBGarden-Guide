@@ -12,10 +12,13 @@ class ExhibitionDetailController : UIViewController, UITableViewDataSource, UITa
     
     var listenerType: ListenerType = .exhibition
     
+    //unused
     var sort: Bool?
     
+    //unused
     var plant: Plant?
     
+    //is listened
     var exhibition: Exhibition?
     
     func onExhibitionTableChange(change: DatabaseChange, exhibitions: [Exhibition]) {

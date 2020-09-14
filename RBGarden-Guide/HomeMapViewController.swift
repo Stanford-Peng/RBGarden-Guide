@@ -58,14 +58,15 @@ class HomeMapViewController: UIViewController, DatabaseListener {
     var allExhibitions:[Exhibition]?
     var locationManager:CLLocationManager = CLLocationManager()
     //var allExhibitionAnnotation:[ExhibitionAnnotation]?
-    let RADIUS:Double = 250
+    let RADIUS:Double = 100
     override func viewDidLoad() {
         super.viewDidLoad()
         let authorisationStatus = CLLocationManager.authorizationStatus()
         if authorisationStatus == .notDetermined{
             locationManager.requestWhenInUseAuthorization()
         }
-        
+        //define accuracy
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
@@ -158,7 +159,9 @@ class HomeMapViewController: UIViewController, DatabaseListener {
         guard let exhibitions = allExhibitions else{return}
         for exhibition in exhibitions{
             let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), radius: RADIUS, identifier: exhibition.exhibitionName!)
+            homeMap?.addOverlay(MKCircle(center:CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), radius: RADIUS))
             startMonitoring(region: region)
+            print(region.center)
         }
     }
     
@@ -167,6 +170,9 @@ class HomeMapViewController: UIViewController, DatabaseListener {
         for region in locationManager.monitoredRegions {
             locationManager.stopMonitoring(for: region)
         }
+        guard let overlays = homeMap?.overlays else { return }
+        homeMap?.removeOverlays(overlays)
+        
     }
     
     //Customize monitoring function
@@ -251,6 +257,7 @@ extension HomeMapViewController: MKMapViewDelegate {
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             view.glyphImage = UIImage(named:annotation.icon!)
         }
+        
         return view
         
     }
@@ -259,6 +266,17 @@ extension HomeMapViewController: MKMapViewDelegate {
         tappedView = view
         performSegue(withIdentifier: "goToExhibitionDetail", sender: self)
         
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKCircle {
+          let circleRenderer = MKCircleRenderer(overlay: overlay)
+          circleRenderer.lineWidth = 1.0
+          circleRenderer.strokeColor = .purple
+          circleRenderer.fillColor = UIColor.purple.withAlphaComponent(0.4)
+          return circleRenderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
     }
     
 }

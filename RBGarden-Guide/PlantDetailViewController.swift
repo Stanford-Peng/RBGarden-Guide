@@ -21,6 +21,8 @@ class PlantDetailViewController: UIViewController {
     
     @IBOutlet weak var yearLabel: UILabel!
     
+    @IBOutlet weak var familyLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,27 +32,7 @@ class PlantDetailViewController: UIViewController {
         sciNameLabel.numberOfLines = 4
         sciNameLabel.lineBreakMode = .byWordWrapping
         
-        if let commonName = selectedPlant?.plantName{
-            plantNameLabel.text = commonName
-        }else{
-            plantNameLabel.text = "No Common Name"
-        }
-        
-        if let scientificName =  selectedPlant?.scientificName{
-            sciNameLabel.text = scientificName
-        }else{
-            sciNameLabel.text = "No Scientific Name"
-        }
-        
-        if let discoverYear = selectedPlant?.discoverYear{
-            yearLabel.text = discoverYear
-        }else{
-            yearLabel.text = "No Year"
-        }
-        
-        indicator.style = UIActivityIndicatorView.Style.medium
-        indicator.center = self.view.center
-        self.view.addSubview(indicator)
+
         
         //download image
         
@@ -84,6 +66,36 @@ class PlantDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let commonName = selectedPlant?.plantName{
+            plantNameLabel.text = commonName
+        }else{
+            plantNameLabel.text = "No Common Name"
+        }
+        
+        if let scientificName =  selectedPlant?.scientificName{
+            sciNameLabel.text = scientificName
+        }else{
+            sciNameLabel.text = "No Scientific Name"
+        }
+        
+        if let discoverYear = selectedPlant?.discoverYear{
+            yearLabel.text = discoverYear
+        }else{
+            yearLabel.text = "Unknown"
+        }
+        
+        if let familyName = selectedPlant?.family{
+            familyLabel.text = familyName
+        }else{
+            familyLabel.text = "Unknown"
+        }
+        
+        indicator.style = UIActivityIndicatorView.Style.medium
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+    }
+    
     func setImageFromUrl(url:String){
         let imageURL = URL(string:url)
         
@@ -113,6 +125,14 @@ class PlantDetailViewController: UIViewController {
             //                }
         }
         task.resume()
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToEditPlant" {
+            let editPlantController = segue.destination as! EditPlantViewController
+            editPlantController.selectedPlant = self.selectedPlant
+        }
     }
     
     

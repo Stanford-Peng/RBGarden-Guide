@@ -43,6 +43,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
             }
         }
         
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 0
+        locationManager.startUpdatingLocation()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -121,4 +124,39 @@ extension SceneDelegate: CLLocationManagerDelegate {
       handleEvent(for: region,action: "exit")
     }
   }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        if status == .denied {
+            let message = "You need to give RBG Location Permission to do geofencing"
+            if UIApplication.shared.applicationState == .active {
+                window?.rootViewController?.displayMessage(title: "Attention", message: message)
+            } else {
+                let notificationContent = UNMutableNotificationContent()
+                notificationContent.body = message
+                notificationContent.sound = UNNotificationSound.default
+                notificationContent.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                let request = UNNotificationRequest(identifier: "permission_change",
+                                                    content: notificationContent,
+                                                    trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { error in
+                    if let error = error {
+                        print("Error: \(error)")
+                    }
+                }
+            }
+        }
+        
+    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        if let location = locations.last {
+//            manager.location
+//
+//        }
+//
+//    }
+
 }

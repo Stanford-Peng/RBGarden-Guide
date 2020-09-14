@@ -14,6 +14,7 @@
 		E63B84AB250621AD005E95C3 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63B84AA250621AD005E95C3 /* DatabaseProtocol.swift */; };
 		E63B84AD25062E7C005E95C3 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63B84AC25062E7C005E95C3 /* MulticastDelegate.swift */; };
 		E63B84AF25062F51005E95C3 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63B84AE25062F51005E95C3 /* CoreDataController.swift */; };
+		E665CDA5250F544700638FE9 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E665CDA4250F544700638FE9 /* EditPlantViewController.swift */; };
 		E66A5EC5250C81A800ADD8B4 /* PlantsVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A5EC4250C81A800ADD8B4 /* PlantsVolume.swift */; };
 		E66A5EC7250C81F500ADD8B4 /* PlantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A5EC6250C81F500ADD8B4 /* PlantData.swift */; };
 		E66A5ECB250CDAE700ADD8B4 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A5ECA250CDAE700ADD8B4 /* Links.swift */; };
@@ -48,6 +49,7 @@
 		E63B84AA250621AD005E95C3 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		E63B84AC25062E7C005E95C3 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		E63B84AE25062F51005E95C3 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		E665CDA4250F544700638FE9 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 		E66A5EC4250C81A800ADD8B4 /* PlantsVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsVolume.swift; sourceTree = "<group>"; };
 		E66A5EC6250C81F500ADD8B4 /* PlantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantData.swift; sourceTree = "<group>"; };
 		E66A5ECA250CDAE700ADD8B4 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				E66A5ECC250CE85500ADD8B4 /* PlantDetailViewController.swift */,
 				E6EFCA6A250DB7BD002BE190 /* LocationAnnotation.swift */,
 				E6EFCA6C250DC22E002BE190 /* EditExhibitionController.swift */,
+				E665CDA4250F544700638FE9 /* EditPlantViewController.swift */,
 			);
 			path = "RBGarden-Guide";
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				E63B84AB250621AD005E95C3 /* DatabaseProtocol.swift in Sources */,
 				E6E5A45E2509057100B30B1A /* ExhibitionDetailController.swift in Sources */,
 				E6D7D3662507C18E002048A3 /* Exhibition+CoreDataClass.swift in Sources */,
+				E665CDA5250F544700638FE9 /* EditPlantViewController.swift in Sources */,
 				E6E1B4F125092AF3006C256C /* plantCellController.swift in Sources */,
 				E63B84AF25062F51005E95C3 /* CoreDataController.swift in Sources */,
 				E6D7D3642507C18E002048A3 /* Plant+CoreDataClass.swift in Sources */,

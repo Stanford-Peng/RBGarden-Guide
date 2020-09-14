@@ -58,6 +58,8 @@ protocol DatabaseProtocol: NSObject {
     func fetchAllPlants() -> [Plant]
     //add for editing exhibition and exhibition detail screen
     func fetchOneExhibitionByName(exhibitionName:String) -> Exhibition?
+    //add for editing plant screen
+    func fetchOnePlantByName(scientificName:String) -> Plant?
 }
 
 //scientificName: String?

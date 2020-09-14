@@ -198,12 +198,14 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
         //tableView.cellForRow(at: <#T##IndexPath#>)
         let indexPath = IndexPath(row: 0, section: 0)
         let basicCell = tableView.cellForRow(at: indexPath) as! ExhibitionBasicCell
-        if let name = basicCell.nameTextfield.text{
+        if let name = basicCell.nameTextfield.text {
             
             if let _ = databaseController?.fetchOneExhibitionByName(exhibitionName: name){
-                displayMessage(title: "Alert", message: "This exhibition is already taken!")
+                displayMessage(title: "Alert", message: "This exhibition name is already taken!")
                 return
             }
+        } else{
+            displayMessage(title: "Alert", message: "The exhibition name cannot be empty!")
         }
         
         if !(basicCell.nameTextfield.text?.isEmpty ?? false) && !(basicCell.descriptionTextField.text?.isEmpty ?? false) && !(basicCell.locationTextField.text?.isEmpty ?? false) && addedPlants.count >= 3 {
