@@ -107,7 +107,7 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
         if indexPath.section == PLANT_SECTION && indexPath.row == 0 {
             return 32.0;
         }
-        return 64.0
+        return 64
     }
     
     //handle tapping add plant cell

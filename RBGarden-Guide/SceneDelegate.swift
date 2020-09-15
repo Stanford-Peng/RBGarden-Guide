@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate{
         let mapViewController = bottomNavigationController.viewControllers.first as! HomeMapViewController
 
         //bottomNavigationController.isNavigationBarHidden=false
-        //mapViewController.navigationItem.leftItemsSupplementBackButton = true
+        mapViewController.navigationItem.leftItemsSupplementBackButton = true
         mapViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         //build coomunication between homeMap and exhibitionTable
         
