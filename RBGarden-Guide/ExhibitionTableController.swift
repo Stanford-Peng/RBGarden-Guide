@@ -229,8 +229,10 @@ class ExhibitionTableController: UITableViewController, DatabaseListener, UISear
         homeMapController?.homeMap.addAnnotation(locationAnnotation)// create a new annotation is not a good pratice
         
         //  homeMapController?.focusViaCoordinate(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), latitudinalMeters: 1000, longitudinalMeters: 1000)
-        if let mapVC = homeMapController {
-            splitViewController?.showDetailViewController(mapVC, sender: nil)
+        if let mapNC = homeMapController?.navigationController {
+            splitViewController?.showDetailViewController(mapNC, sender: nil)
+            
+            //splitViewController?.show(mapVC, sender: self)
         }
         homeMapController?.focusOn(annotation: locationAnnotation, latitudinalMeters: 1000,longitudinalMeters: 1000)
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditPlantViewController: UIViewController {
+class EditPlantViewController: UIViewController, UITextFieldDelegate {
 
     var selectedPlant:Plant?
     weak var databaseController : DatabaseProtocol?
@@ -19,6 +19,10 @@ class EditPlantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sciNameLabel.delegate = self
+        commonNameLabel.delegate = self
+        familyNameLabel.delegate = self
+        yearLabel.delegate = self
         sciNameLabel.text = selectedPlant?.scientificName
         commonNameLabel.text = selectedPlant?.plantName
         familyNameLabel.text = selectedPlant?.family
@@ -46,6 +50,13 @@ class EditPlantViewController: UIViewController {
         if sciNameLabel.text == nil || sciNameLabel.text == ""{
             displayMessage(title: "Alert", message: "Scientiflic name cannot be empty")
             return
+        }
+        
+        if let year = yearLabel.text{
+            if year.count != 4 || !year.isNumeric{
+                displayMessage(title: "Alert", message: "Year should be 4 digits")
+                return
+            }
         }
         
         if selectedPlant?.scientificName == sciNameLabel.text && selectedPlant?.plantName == commonNameLabel.text && selectedPlant?.family == familyNameLabel.text && selectedPlant?.discoverYear == yearLabel.text
@@ -90,4 +101,18 @@ class EditPlantViewController: UIViewController {
         
     }
     
+    //dismiss keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}
+
+extension String {
+    var isNumeric: Bool {
+        //guard self.count > 0 else { return false }
+        let nums: Set<Character> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        return Set(self).isSubset(of: nums)
+    }
 }

@@ -121,24 +121,23 @@ class HomeMapViewController: UIViewController, DatabaseListener {
     func removeAllExhAnnotations(){
         let annotations = homeMap.annotations
         //let annotationsToRemove = annotations.filter{(annotation) throws -> Bool in homeMap.selectedAnnotations.contains({! $0 === annotation})}
-        //annotations.contains(where: <#T##(MKAnnotation) throws -> Bool#>)
+        //annotations.contains(where: T##(MKAnnotation) throws -> Bool)
         //annotations.contain
         for annotation in annotations{
-            
-            //confusion
-            if let exhibitionAnnotation = annotation as? ExhibitionAnnotation{
-                // print(annotation.title)
-                //                if   homeMap.selectedAnnotations.contains(where: { (annotation) -> Bool in
-                //                    return annotation === exhibitionAnnotation
-                //
-                //                })  {
-                //                    continue
-                //                }
+             if let exhibitionAnnotation = annotation as? ExhibitionAnnotation{
+//                if homeMap.selectedAnnotations.contains(where: { (anno) -> Bool in
+//
+//                    return exhibitionAnnotation == anno
+//                }){
+//                    continue
+//                }
                 
                 homeMap.removeAnnotation(exhibitionAnnotation)
             }
+            }
+            
         }
-    }
+    
     //Add annotation
     func addExhibitionAnnotations(exhibitionSet:[Exhibition]){
         //let allExhibitions = databaseController?.fetchAllExhibitions(sort: true)
@@ -320,3 +319,28 @@ extension MKMapView{
     }
 }
 
+
+// print(annotation.title)
+//                if   homeMap.selectedAnnotations.contains(where: { (annotation) -> Bool in
+//                    return annotation === exhibitionAnnotation
+//
+//                })  {
+//                    continue
+//                }
+
+            //confusion
+//            if let exhibitionAnnotation = annotation as? ExhibitionAnnotation{
+//
+//                if homeMap.selectedAnnotations.contains(where: { (annos:MKAnnotation) -> Bool in
+//                    return annos as? ExhibitionAnnotation == exhibitionAnnotation
+//                    for ann in annos{
+//                        return ann == exhibitionAnnotation
+//                        if ann == exhibitionAnnotation{
+//                            return true
+//                        }
+//                    }
+//                }
+//                    )
+//                {
+//                  continue
+//                }

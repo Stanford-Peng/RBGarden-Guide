@@ -102,7 +102,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scientifc Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSr-Bi-Wty">
-                                                    <rect key="frame" x="23" y="37" width="85.5" height="15"/>
+                                                    <rect key="frame" x="23" y="37" width="85.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -136,10 +136,11 @@
                                                 <constraint firstItem="a5j-TM-IZg" firstAttribute="bottom" secondItem="8WC-fy-Fgt" secondAttribute="bottomMargin" id="385-zC-UJF"/>
                                                 <constraint firstItem="ssm-bB-Inz" firstAttribute="leading" relation="lessThanOrEqual" secondItem="xSr-Bi-Wty" secondAttribute="trailing" constant="167.5" id="3wS-J9-6O1"/>
                                                 <constraint firstItem="tPD-MS-tXQ" firstAttribute="leading" secondItem="8WC-fy-Fgt" secondAttribute="leading" constant="16" id="5mA-Ku-MYz"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="xSr-Bi-Wty" secondAttribute="bottom" id="JSa-7W-w4S"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="xSr-Bi-Wty" secondAttribute="trailing" constant="128" id="NVN-Ri-Jaa"/>
                                                 <constraint firstItem="tPD-MS-tXQ" firstAttribute="top" secondItem="8WC-fy-Fgt" secondAttribute="top" constant="4" id="Wa4-Hs-i3e"/>
                                                 <constraint firstItem="xSr-Bi-Wty" firstAttribute="leading" secondItem="8WC-fy-Fgt" secondAttribute="leadingMargin" constant="8" id="dkj-ic-ait"/>
-                                                <constraint firstItem="xSr-Bi-Wty" firstAttribute="top" secondItem="tPD-MS-tXQ" secondAttribute="bottom" constant="12" id="h26-s8-RXe"/>
+                                                <constraint firstItem="xSr-Bi-Wty" firstAttribute="top" relation="lessThanOrEqual" secondItem="tPD-MS-tXQ" secondAttribute="bottom" constant="12" id="h26-s8-RXe"/>
                                                 <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="tPD-MS-tXQ" secondAttribute="trailing" constant="240" id="iJ7-SF-E1b"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="a5j-TM-IZg" secondAttribute="trailing" constant="16" id="jRu-8a-jG9"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ssm-bB-Inz" secondAttribute="bottom" id="qQc-BW-Z0r"/>
@@ -337,7 +338,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scientifc Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5j-nD-ZPf">
-                                            <rect key="frame" x="24" y="37" width="85.5" height="15"/>
+                                            <rect key="frame" x="24" y="37" width="85.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -373,12 +374,13 @@
                                         <constraint firstItem="5y9-W6-1w1" firstAttribute="bottom" secondItem="5FU-CW-2Ei" secondAttribute="bottomMargin" id="IeE-Bt-Ybb"/>
                                         <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="m5j-nD-ZPf" secondAttribute="trailing" constant="128" id="MMv-Ih-NV3"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="5fc-9k-mYr" secondAttribute="bottom" id="Ogx-nX-lcP"/>
-                                        <constraint firstItem="m5j-nD-ZPf" firstAttribute="top" secondItem="Ytk-NI-YqX" secondAttribute="bottom" constant="12" id="Ovi-da-kAE"/>
+                                        <constraint firstItem="m5j-nD-ZPf" firstAttribute="top" relation="lessThanOrEqual" secondItem="Ytk-NI-YqX" secondAttribute="bottom" constant="12" id="Ovi-da-kAE"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="5y9-W6-1w1" secondAttribute="trailing" constant="16" id="VKK-NZ-Qfd"/>
                                         <constraint firstItem="m5j-nD-ZPf" firstAttribute="leading" secondItem="5FU-CW-2Ei" secondAttribute="leadingMargin" constant="8" id="db8-CT-k8Q"/>
                                         <constraint firstItem="Ytk-NI-YqX" firstAttribute="leading" secondItem="5FU-CW-2Ei" secondAttribute="leading" constant="16" id="icZ-ge-awm"/>
                                         <constraint firstItem="5y9-W6-1w1" firstAttribute="leading" secondItem="5fc-9k-mYr" secondAttribute="trailing" constant="8" id="nDg-ov-pKy"/>
                                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Ytk-NI-YqX" secondAttribute="trailing" constant="240" id="ryi-B7-TOf"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="m5j-nD-ZPf" secondAttribute="bottom" id="vPI-I3-W3L"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -832,7 +834,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scientifc Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvl-Ky-W3K">
-                                            <rect key="frame" x="24" y="37" width="85.5" height="15"/>
+                                            <rect key="frame" x="24" y="37" width="85.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -870,7 +872,8 @@
                                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="yBm-Df-jfO" secondAttribute="trailing" constant="240" id="WwM-N2-fyx"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="cvj-Qq-Yp8" secondAttribute="trailing" constant="16" id="ajq-xB-icr"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="d4a-Jc-nTX" secondAttribute="bottom" id="hWZ-ip-O54"/>
-                                        <constraint firstItem="jvl-Ky-W3K" firstAttribute="top" secondItem="yBm-Df-jfO" secondAttribute="bottom" constant="12" id="lwE-K7-a9b"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="jvl-Ky-W3K" secondAttribute="bottom" id="lej-30-Dd2"/>
+                                        <constraint firstItem="jvl-Ky-W3K" firstAttribute="top" relation="lessThanOrEqual" secondItem="yBm-Df-jfO" secondAttribute="bottom" constant="12" id="lwE-K7-a9b"/>
                                         <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="jvl-Ky-W3K" secondAttribute="trailing" constant="128" id="pb2-mc-NEk"/>
                                         <constraint firstItem="yBm-Df-jfO" firstAttribute="leading" secondItem="NYS-W7-9h6" secondAttribute="leading" constant="16" id="qpS-tZ-Fga"/>
                                         <constraint firstItem="jvl-Ky-W3K" firstAttribute="leading" secondItem="NYS-W7-9h6" secondAttribute="leadingMargin" constant="8" id="yxc-qQ-7hu"/>

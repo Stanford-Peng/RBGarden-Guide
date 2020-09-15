@@ -242,7 +242,7 @@ class EditExhibitionController: UITableViewController, AddPlantToDetailDelegate 
 
         databaseController?.cleanup()
         navigationController?.popViewController(animated: false)
-        //navigationController?.popViewController(animated: false)
+        navigationController?.popViewController(animated: true)
         //navigationController?.popToRootViewController(animated: true)
         
         //navigationController?.dismiss(animated: true, completion: nil)
