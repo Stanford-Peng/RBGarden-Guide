@@ -158,7 +158,7 @@ class HomeMapViewController: UIViewController, DatabaseListener {
         guard let exhibitions = allExhibitions else{return}
         for exhibition in exhibitions{
             let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), radius: RADIUS, identifier: exhibition.exhibitionName!)
-            homeMap?.addOverlay(MKCircle(center:CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), radius: RADIUS))
+            //homeMap?.addOverlay(MKCircle(center:CLLocationCoordinate2D(latitude: exhibition.location_lat, longitude: exhibition.location_long), radius: RADIUS))
             startMonitoring(region: region)
             print(region.center)
         }
@@ -169,8 +169,8 @@ class HomeMapViewController: UIViewController, DatabaseListener {
         for region in locationManager.monitoredRegions {
             locationManager.stopMonitoring(for: region)
         }
-        guard let overlays = homeMap?.overlays else { return }
-        homeMap?.removeOverlays(overlays)
+        //guard let overlays = homeMap?.overlays else { return }
+        //homeMap?.removeOverlays(overlays)
         
     }
     
