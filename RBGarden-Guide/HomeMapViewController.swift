@@ -125,6 +125,10 @@ class HomeMapViewController: UIViewController, DatabaseListener {
         //annotations.contain
         for annotation in annotations{
              if let exhibitionAnnotation = annotation as? ExhibitionAnnotation{
+                
+
+
+                //homeMap.selectedAnnotations.contains($0)
 //                if homeMap.selectedAnnotations.contains(where: { (anno) -> Bool in
 //
 //                    return exhibitionAnnotation == anno
@@ -137,6 +141,7 @@ class HomeMapViewController: UIViewController, DatabaseListener {
             }
             
         }
+
     
     //Add annotation
     func addExhibitionAnnotations(exhibitionSet:[Exhibition]){
@@ -329,18 +334,18 @@ extension MKMapView{
 //                }
 
             //confusion
-//            if let exhibitionAnnotation = annotation as? ExhibitionAnnotation{
-//
-//                if homeMap.selectedAnnotations.contains(where: { (annos:MKAnnotation) -> Bool in
-//                    return annos as? ExhibitionAnnotation == exhibitionAnnotation
-//                    for ann in annos{
-//                        return ann == exhibitionAnnotation
-//                        if ann == exhibitionAnnotation{
-//                            return true
-//                        }
-//                    }
-//                }
-//                    )
-//                {
-//                  continue
-//                }
+//if let exhibitionAnnotation = annotation as? ExhibitionAnnotation{
+//    if homeMap.selectedAnnotations.contains(where: { (annos:MKAnnotation) -> Bool in
+//        return annos as? ExhibitionAnnotation == exhibitionAnnotation
+//        //                         for ann in annos{
+//        //                             return ann == exhibitionAnnotation
+//        //                             if ann == exhibitionAnnotation{
+//        //                                 return true
+//        //                             }
+//        //                         }
+//    }
+//        )
+//    {
+//        continue
+//}
+//}

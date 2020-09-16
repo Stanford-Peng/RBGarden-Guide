@@ -53,8 +53,12 @@ class EditPlantViewController: UIViewController, UITextFieldDelegate {
         }
         
         if let year = yearLabel.text{
-            if year.count != 4 || !year.isNumeric{
+            let date = Date()
+            if year.count != 4 || !year.isNumeric {
                 displayMessage(title: "Alert", message: "Year should be 4 digits")
+                return
+            } else if Int(year)! < 0 || Int(year)! > Calendar.current.dateComponents([.year], from: date).year! {
+                displayMessage(title: "Alert", message: "Year should be valid")
                 return
             }
         }

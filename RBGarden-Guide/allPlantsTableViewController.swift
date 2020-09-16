@@ -32,7 +32,7 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
         searchController.searchBar.delegate = self
         
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search for card"
+        searchController.searchBar.placeholder = "Search for plants"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
