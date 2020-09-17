@@ -24,6 +24,7 @@ class EditExhibitionController: UITableViewController, AddPlantToDetailDelegate 
     var addedPlants:[Plant] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.keyboardDismissMode = .onDrag
         addedPlants = allPlants!
         
         

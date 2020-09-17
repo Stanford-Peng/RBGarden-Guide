@@ -29,6 +29,7 @@ class AddExhibitionTableController: UITableViewController, AddPlantToDetailDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.keyboardDismissMode = .onDrag
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         //allPlants = databaseController?.fetchAllPlants()
@@ -255,5 +256,12 @@ extension UITableViewController{
             return "fruit-tree"
         }
         
+    }
+}
+
+
+extension UIViewController{
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
