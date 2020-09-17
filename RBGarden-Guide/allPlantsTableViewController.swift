@@ -121,7 +121,7 @@ class allPlantsTableViewController: UITableViewController, UISearchBarDelegate, 
                 if let discoverYear = plant.discoveredYear{
                     cell.discoveredYear.text = String(discoverYear)
                 }else{
-                    cell.discoveredYear.text = "No Discover Year"
+                    cell.discoveredYear.text = "No Year"
                 }
             }
             

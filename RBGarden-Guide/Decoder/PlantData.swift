@@ -28,12 +28,18 @@ class PlantData: NSObject, Decodable {
     }
     
     
-//    required init(from decoder:Decoder) throws{
-//        let container = try? decoder.container(keyedBy: CodingKeys.self)
-//        intYear = try? container?.decode(Int.self, forKey: .intYear)
-//        discoveredYear = String(intYear!)
-//
-//
-//    }
+    required init(from decoder:Decoder) throws{
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        discoveredYear = try? container.decode(Int.self, forKey: .discoveredYear)
+        plantName = try? container.decode(String.self, forKey:.plantName)
+        scientificName = try? container.decode(String.self, forKey: .scientificName)
+        family = try? container.decode(String.self, forKey: .family)
+        //discoveredYear = try?
+        //let year = intYear ?? ""
+        //discoveredYear = String(year)
+        imageUrl = try? container.decode(String.self, forKey: .imageUrl)
+
+
+    }
 
 }
