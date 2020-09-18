@@ -92,22 +92,41 @@ class EditExhibitionController: UITableViewController, AddPlantToDetailDelegate 
         //guard let addedPlants = allPlants else { return cell }
         let plant = addedPlants[indexPath.row - 1]
         
-        if let commonName = plant.plantName{
-            cell.commonName.text = commonName
-        }else{
-            cell.commonName.text = "No Common Name"
-        }
         
-        if let scientificName = plant.scientificName {
-            cell.scientificNameLabel.text = scientificName
+//        if let commonName = plant.plantName{
+//            cell.commonName.text = commonName
+//        }else{
+//            cell.commonName.text = "No Common Name"
+//        }
+//
+//        if let scientificName = plant.scientificName {
+//            cell.scientificNameLabel.text = scientificName
+//        }else{
+//            cell.scientificNameLabel.text = "No Scientific Name"
+//        }
+//
+//        if let discoverYear = plant.discoverYear{
+//            cell.discoveredYear.text = discoverYear
+//        }else{
+//            cell.discoveredYear.text = "No Year"
+//        }
+        
+        if plant.scientificName != nil && plant.scientificName != ""{
+            cell.scientificNameLabel.text = plant.scientificName
         }else{
             cell.scientificNameLabel.text = "No Scientific Name"
         }
         
-        if let discoverYear = plant.discoverYear{
-            cell.discoveredYear.text = discoverYear
+        if plant.plantName != nil && plant.plantName != ""{
+            cell.commonName.text = plant.plantName
         }else{
-            cell.discoveredYear.text = "No Year"
+            cell.commonName.text = "No Common Name"
+        }
+        
+        if plant.discoverYear != nil && plant.discoverYear != ""{
+            cell.discoveredYear.text = plant.discoverYear
+        }else{
+            cell.discoveredYear.text = "No Discover Year"
         }
         
         return cell

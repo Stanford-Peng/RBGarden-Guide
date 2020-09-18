@@ -35,7 +35,6 @@
 		E6E5A45C25086C7400B30B1A /* addLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E5A45B25086C7400B30B1A /* addLocationViewController.swift */; };
 		E6E5A45E2509057100B30B1A /* ExhibitionDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E5A45D2509057100B30B1A /* ExhibitionDetailController.swift */; };
 		E6EDE5D6250A3829007C4B55 /* allPlantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EDE5D5250A3829007C4B55 /* allPlantsTableViewController.swift */; };
-		E6EDE5D9250A4390007C4B55 /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EDE5D8250A4390007C4B55 /* Delegate.swift */; };
 		E6EFCA6B250DB7BD002BE190 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EFCA6A250DB7BD002BE190 /* LocationAnnotation.swift */; };
 		E6EFCA6D250DC22E002BE190 /* EditExhibitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EFCA6C250DC22E002BE190 /* EditExhibitionController.swift */; };
 /* End PBXBuildFile section */
@@ -72,7 +71,6 @@
 		E6E5A45B25086C7400B30B1A /* addLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addLocationViewController.swift; sourceTree = "<group>"; };
 		E6E5A45D2509057100B30B1A /* ExhibitionDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionDetailController.swift; sourceTree = "<group>"; };
 		E6EDE5D5250A3829007C4B55 /* allPlantsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allPlantsTableViewController.swift; sourceTree = "<group>"; };
-		E6EDE5D8250A4390007C4B55 /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
 		E6EFCA6A250DB7BD002BE190 /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
 		E6EFCA6C250DC22E002BE190 /* EditExhibitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExhibitionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				E66A5EC3250C817300ADD8B4 /* Decoder */,
-				E6EDE5D7250A435A007C4B55 /* Delegate */,
 				E6D7D35B25071EE6002048A3 /* Cells */,
 				E63B84A925062173005E95C3 /* Database */,
 				E6CFF0732503AF94001447DF /* DataModel */,
@@ -174,14 +171,6 @@
 				E6D7D35E25076D92002048A3 /* ExhibitionBasicCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		E6EDE5D7250A435A007C4B55 /* Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				E6EDE5D8250A4390007C4B55 /* Delegate.swift */,
-			);
-			path = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,7 +249,6 @@
 				E66A5EC5250C81A800ADD8B4 /* PlantsVolume.swift in Sources */,
 				E60575EB250537AF00E51DAD /* ExhibitionTableController.swift in Sources */,
 				E6CFF0762503B00F001447DF /* RBGModel.xcdatamodeld in Sources */,
-				E6EDE5D9250A4390007C4B55 /* Delegate.swift in Sources */,
 				E60575ED2505380900E51DAD /* AddExhibitionTableController.swift in Sources */,
 				E6E5A45C25086C7400B30B1A /* addLocationViewController.swift in Sources */,
 				E6EFCA6D250DC22E002BE190 /* EditExhibitionController.swift in Sources */,
